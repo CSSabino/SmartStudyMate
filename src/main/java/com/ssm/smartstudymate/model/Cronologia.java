@@ -14,12 +14,12 @@ public class Cronologia {
         return cronologia;
     }
 
-    public void inserisciChat(String lezione, Chat chat){
-        cronologia.put(lezione, chat);
+    public void inserisciChat(String urlLezione, Chat chat){
+        cronologia.put(urlLezione, chat);
     }
 
-    public Chat recuparaChat(String lezione){
-        return cronologia.get(lezione);
+    public Chat recuparaChat(String urlLezione){
+        return cronologia.get(urlLezione);
     }
 
     public int numeroChat(){

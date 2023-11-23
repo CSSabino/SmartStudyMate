@@ -45,6 +45,9 @@ public class LoginServlet extends HttpServlet {
 
             if (docente != null) {
                 session.setAttribute("utente", docente);
+                VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
+                ArrayList<Videolezione> videolezioni = videolezioneDAO.doRetrieveByDocente(docente);
+                session.setAttribute("videolezioni", videolezioni);
                 session.setAttribute("success-login", "ok");
                 address = "/WEB-INF/jsp/home.jsp";
 
@@ -70,8 +73,6 @@ public class LoginServlet extends HttpServlet {
         String address;
         VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
         ArrayList<Videolezione> videolezioni = videolezioneDAO.doRetrieveByAccessCode(accessCode);
-
-        System.out.println("Videolezioni? " + videolezioni.isEmpty());
 
         if(videolezioni != null && !(videolezioni.isEmpty())){
             session.setAttribute("videolezioni", videolezioni);

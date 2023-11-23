@@ -25,7 +25,16 @@ body {
     overflow: hidden;
 }
 
-#loginForm h2, #passwordForm h2 {
+#videolezioneForm {
+    width: 100%;
+    max-width: 500px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#loginForm h2, #passwordForm h2, #videolezioneForm h2 {
     background-color: #8c8cff;
     color: #fff;
     padding: 20px;

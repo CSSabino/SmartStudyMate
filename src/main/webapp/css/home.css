@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+nav {
+    text-align: center;
+    background-color: #444;
+    padding: 16px 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* Divide lo spazio in due colonne */
+    gap: 20px;
+    padding: 20px;
+    min-height: 400px;
+}
+
+.left-block{
+    max-height: 400px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.right-block {
+    max-height: 400px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-item {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.image-item img {
+    max-width: 70%;
+    height: auto;
+    display: block;
+}
+#intestazione-chat{
+    text-align: center;
+    font-size: 14px;
+    background-color: #00A783;
+    /*background-color: #159641;*/
+}
+#intestazione-chat h1{
+    margin-top: 0;
+    font-weight: bold;
+    color: white;
+}
+.chat-container {
+    width: 99%;
+    height: 80%;
+    overflow-y: scroll;
+}
+.chat-messages {
+    flex: 1;
+    padding: 10px;
+}
+.message {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+}
+.bot-message {
+    background-color: #ECE5DD;
+    width: 70%;
+    color: #333;
+}
+.user-message {
+    margin-left: 20%;
+    background-color: #D9FDD3;
+    color: #333;
+}
+
+/* Stile per il form della chat */
+#message-form {
+    display: flex;
+}
+
+/* Stile per il campo di input del messaggio */
+#message-input {
+    flex: 1; /* Per riempire lo spazio disponibile */
+    padding: 8px;
+    margin-bottom: 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Stile per il pulsante "Invia" */
+#message-form button {
+    padding: 8px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #00BAAA;
+    color: white;
+    cursor: pointer;
+}
+
+.image-item button {
+    padding: 8px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #00BAAA;
+    color: white;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 0;
+}
