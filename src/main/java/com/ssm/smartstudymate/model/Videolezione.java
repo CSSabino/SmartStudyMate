@@ -6,6 +6,8 @@ public class Videolezione {
     private String urlVideo;
     private String descrizione;
 
+    public Videolezione(){}
+
     public Videolezione(String titolo, String urlVideo, String descrizione) {
         this.titolo = titolo;
         this.urlVideo = urlVideo;

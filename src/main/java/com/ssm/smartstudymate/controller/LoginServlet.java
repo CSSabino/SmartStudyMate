@@ -2,6 +2,8 @@ package com.ssm.smartstudymate.controller;
 
 import com.ssm.smartstudymate.model.Docente;
 import com.ssm.smartstudymate.model.DocenteDAO;
+import com.ssm.smartstudymate.model.Videolezione;
+import com.ssm.smartstudymate.model.VideolezioneDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "loginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
@@ -43,11 +46,12 @@ public class LoginServlet extends HttpServlet {
             if (docente != null) {
                 session.setAttribute("utente", docente);
                 session.setAttribute("success-login", "ok");
-                address = "/WEB-INF/jsp/index.jsp";
+                address = "/WEB-INF/jsp/home.jsp";
 
             } else {
-                request.setAttribute("success-login", "not ok");
-                address = "/WEB-INF/login.jsp";
+                session.removeAttribute("success-access");
+                session.setAttribute("success-login", "not ok");
+                address = "/WEB-INF/jsp/login.jsp";
             }
         }
 
@@ -56,6 +60,33 @@ public class LoginServlet extends HttpServlet {
 
         dispatcher.forward(request, response);
 
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String accessCode = request.getParameter("accessCode");
+
+        HttpSession session = request.getSession();
+        String address;
+        VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
+        ArrayList<Videolezione> videolezioni = videolezioneDAO.doRetrieveByAccessCode(accessCode);
+
+        System.out.println("Videolezioni? " + videolezioni.isEmpty());
+
+        if(videolezioni != null && !(videolezioni.isEmpty())){
+            session.setAttribute("videolezioni", videolezioni);
+            session.setAttribute("success-access", "ok");
+            address = "/WEB-INF/jsp/home.jsp";
+        } else {
+            session.removeAttribute("success-login");
+            session.setAttribute("success-access", "not ok");
+            address = "/WEB-INF/jsp/login.jsp";
+        }
+
+        RequestDispatcher dispatcher =
+                request.getRequestDispatcher(address);
+
+        dispatcher.forward(request, response);
     }
 }
 
