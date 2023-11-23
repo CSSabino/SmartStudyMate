@@ -51,7 +51,7 @@
             %>
             <div id="image-item<%=i%>" class="image-item">
                 <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>')" style="max-width: 100%">
-                <span><%=videolezione.getTitolo()%></span>
+                <span><strong><%=videolezione.getTitolo()%></strong></span>
             </div>
 
             <%
@@ -60,7 +60,7 @@
 
             <div id="image-item<%=i%>" class="image-item">
                 <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>')">
-                <span><%=videolezione.getTitolo()%></span>
+                <span><strong><%=videolezione.getTitolo()%></strong></span>
             </div>
 
             <%
@@ -75,7 +75,7 @@
         %>
         <div>
             <form action="router-servlet?filejsp=add_lesson.jsp" method="post">
-                <button type="submit">Aggiungi videolezione</button>
+                <button id="add_lesson" type="submit">Aggiungi videolezione</button>
             </form>
         </div>
         <%
@@ -100,7 +100,9 @@
                     if(chat == null){
                 %>
 
-                <div class="message bot-message">Scegli una videolezione prima di poter chattare con me!</div>
+                <div class="message bot-message">Scegli una videolezione prima di poter chattare con me! <strong>NOTA BENE:</strong>Le risposte del modello
+                    non potrebbero sempre essere corrette. Fornisci le domande in modo corretto al fine di ottenere una risposta più
+                accurate da parte le modello.</div>
 
                 <%
                 } else {
@@ -128,7 +130,9 @@
 
                 %>
 
-                <div class="message bot-message">Inizia a fare domande sulla lezione "<%=videolezioneSelezionata.getTitolo()%>"</div>
+                <div class="message bot-message">Inizia a fare domande sulla lezione "<%=videolezioneSelezionata.getTitolo()%>"
+                    <strong>NOTA BENE: </strong>Le risposte del modello potrebbero NON ESSERE SEMPRE corrette. Fornisci le domande in modo corretto al fine di ottenere una risposta più
+                    accurata da parte le modello.</div>
 
                 <%
                         }
@@ -139,7 +143,7 @@
 
         <div id="message-form">
 
-            <input type="text" id="message-input" placeholder="Scrivi un messaggio...">
+            <input type="text" id="message-input" placeholder="Cosa dice il professore in merito a...">
             <button id="button-chat" type="submit" onclick="sendMessage('<%=lessonSelected%>')">Invia</button>
 
         </div>
