@@ -28,13 +28,15 @@ public class SceltaLezioneServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
+        session.setAttribute("lesson-selected", lezioneScelta);
+
         Cronologia cronologia = (Cronologia) session.getAttribute("cronologia");
 
         // Verifica esistenza cronologia chat
         Boolean flag = false;
 
         if(cronologia != null) {
-            if (cronologia.recuparaChat(lezioneScelta) != null){
+            if (cronologia.recuperaChat(lezioneScelta) != null){
                 flag = true;
             }
 
@@ -83,8 +85,8 @@ public class SceltaLezioneServlet extends HttpServlet {
         response.getWriter().append("[");
         String chatMessagges = "";
 
-        if(cronologia.recuparaChat(lezioneScelta) != null){
-            ArrayList<String> messagges = cronologia.recuparaChat(lezioneScelta).leggiMessaggi();
+        if(cronologia.recuperaChat(lezioneScelta) != null){
+            ArrayList<String> messagges = cronologia.recuperaChat(lezioneScelta).leggiMessaggi();
 
             if(!messagges.isEmpty()) {
 

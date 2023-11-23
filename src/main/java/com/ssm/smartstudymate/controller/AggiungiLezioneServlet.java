@@ -81,7 +81,7 @@ public class AggiungiLezioneServlet extends HttpServlet {
 
                 session.setAttribute("videolezioni", playlist);
 
-                address = "/WEB-INF/jsp/home.jsp";
+                address = "router-servlet?filejsp=home.jsp";
 
             } else {
                 session.setAttribute("lesson-presence", "true");

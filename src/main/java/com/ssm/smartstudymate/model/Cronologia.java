@@ -18,7 +18,7 @@ public class Cronologia {
         cronologia.put(urlLezione, chat);
     }
 
-    public Chat recuparaChat(String urlLezione){
+    public Chat recuperaChat(String urlLezione){
         return cronologia.get(urlLezione);
     }
 

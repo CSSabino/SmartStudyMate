@@ -36,6 +36,7 @@
         <div id="videolesson-block" class="image-container">
             <%
                 ArrayList<Videolezione> playlist = (ArrayList<Videolezione>) session.getAttribute("videolezioni");
+                Videolezione videolezioneSelezionata = null;
                 Docente docente = (Docente) session.getAttribute("utente");
                 String lessonSelected = (String) session.getAttribute("lesson-selected");
 
@@ -44,10 +45,11 @@
 
                     for(int i = 0; i < playlist.size(); i++){
                         Videolezione videolezione = playlist.get(i);
-                        if(1 > 2){
+                        if(videolezione.getUrlVideo().equalsIgnoreCase(lessonSelected)){
+                            videolezioneSelezionata = videolezione;
             %>
             <div id="image-item<%=i%>" class="image-item">
-                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="selectVideolesson(this.id)" style="max-width: 100%">
+                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>')" style="max-width: 100%">
                 <span><%=videolezione.getTitolo()%></span>
             </div>
 
@@ -56,7 +58,7 @@
             %>
 
             <div id="image-item<%=i%>" class="image-item">
-                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="selectVideolesson(this.id)">
+                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>')">
                 <span><%=videolezione.getTitolo()%></span>
             </div>
 
@@ -89,7 +91,7 @@
                     Chat chat = null;
 
                     if(lessonSelected != null){
-                        chat = cronologia.recuparaChat("lesson"+lessonSelected);
+                        chat = cronologia.recuperaChat(lessonSelected);
                     }
 
                     if(chat == null){
@@ -123,7 +125,7 @@
 
                 %>
 
-                <div class="message bot-message">Inizia a fare domande sulla lezione <%=Integer.parseInt(lessonSelected)+1%> intitolata "<%=playlist.get(Integer.parseInt(lessonSelected)).getTitolo()%>"</div>
+                <div class="message bot-message">Inizia a fare domande sulla lezione "<%=videolezioneSelezionata.getTitolo()%>"</div>
 
                 <%
                         }

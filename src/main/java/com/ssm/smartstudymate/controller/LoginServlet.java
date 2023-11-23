@@ -77,7 +77,7 @@ public class LoginServlet extends HttpServlet {
         if(videolezioni != null && !(videolezioni.isEmpty())){
             session.setAttribute("videolezioni", videolezioni);
             session.setAttribute("success-access", "ok");
-            address = "/WEB-INF/jsp/home.jsp";
+            address = "router-servlet?filejsp=home.jsp";
         } else {
             session.removeAttribute("success-login");
             session.setAttribute("success-access", "not ok");
