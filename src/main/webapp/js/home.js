@@ -5,7 +5,7 @@ function selectVideolesson(numberLesson, urlLezione){
 
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            zoomBlock(this, numberLesson, urlLezione);
+            zoomBlock(this, numberLesson);
         }
     };
 
@@ -15,7 +15,7 @@ function selectVideolesson(numberLesson, urlLezione){
 
 }
 
-function zoomBlock(xmlhttp, numBlock, urlLezione) {
+function zoomBlock(xmlhttp, numBlock) {
     var json = JSON.parse(xmlhttp.responseText);
     var block = document.getElementById("videolesson-block");
     var videoSelect = document.getElementById(numBlock);
@@ -23,7 +23,6 @@ function zoomBlock(xmlhttp, numBlock, urlLezione) {
     var buttons = block.querySelectorAll('button');
     var chat = document.getElementById("chat");
     var button = document.getElementById("button-chat");
-    var imageBlockButton = document.getElementById("button" + numBlock)
 
     for (var i = 0; i < videos.length; i++) {
         videos[i].setAttribute("style", "");
@@ -33,8 +32,8 @@ function zoomBlock(xmlhttp, numBlock, urlLezione) {
         buttons[i].setAttribute("style", "display: none");
     }
 
+
     videoSelect.setAttribute("style", "max-width: 100%");
-    imageBlockButton.setAttribute("style", "")
 
     let divMessage = "";
 

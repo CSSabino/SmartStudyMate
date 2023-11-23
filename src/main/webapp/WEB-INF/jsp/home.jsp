@@ -38,10 +38,11 @@
                 ArrayList<Videolezione> playlist = (ArrayList<Videolezione>) session.getAttribute("videolezioni");
                 Videolezione videolezioneSelezionata = null;
                 Docente docente = (Docente) session.getAttribute("utente");
+
+                // URL della videolezione selezionata
                 String lessonSelected = (String) session.getAttribute("lesson-selected");
 
                 if(playlist != null){
-                    //System.out.println(lessonSelected);
 
                     for(int i = 0; i < playlist.size(); i++){
                         Videolezione videolezione = playlist.get(i);
@@ -67,17 +68,19 @@
                     }
                 }
 
-                if(docente != null){
-            %>
-            <div>
-                <form action="router-servlet?filejsp=add_lesson.jsp" method="post">
-                    <button type="submit">Aggiungi videolezione</button>
-                </form>
-            </div>
-            <%
-                }
             %>
         </div>
+        <%
+            if(docente != null){
+        %>
+        <div>
+            <form action="router-servlet?filejsp=add_lesson.jsp" method="post">
+                <button type="submit">Aggiungi videolezione</button>
+            </form>
+        </div>
+        <%
+            }
+        %>
     </div>
 
     <div id="right-block" class="right-block">
@@ -137,7 +140,7 @@
         <div id="message-form">
 
             <input type="text" id="message-input" placeholder="Scrivi un messaggio...">
-            <button id="button-chat" type="submit" onclick="sendMessage('<%="lesson"+lessonSelected%>')">Invia</button>
+            <button id="button-chat" type="submit" onclick="sendMessage('<%=lessonSelected%>')">Invia</button>
 
         </div>
 
