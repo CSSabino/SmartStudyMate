@@ -134,7 +134,7 @@ nav a:hover {
 }
 
 /* Stile per il pulsante "Invia" */
-#message-form button, #add_lesson {
+#message-form button, #add_lesson, #crea_quiz {
     padding: 8px 15px;
     margin-left: 10px;
     border: none;
@@ -144,7 +144,9 @@ nav a:hover {
     cursor: pointer;
 }
 
-#message-form button:hover, #add_lesson:hover, #search-button:hover {
+#message-form button:hover, #add_lesson:hover,
+#search-button:hover, #crea_quiz:hover,
+#quiz-button:hover, #value-button:hover {
     background-color: #9c73ba;
 }
 
@@ -177,4 +179,32 @@ nav a:hover {
     background-color: #8a59ae;
     color: white;
     cursor: pointer;
+}
+
+#value-button-box {
+    bottom: 0;
+    display: flex;
+}
+
+#quiz-button, #value-button {
+    padding: 8px 15px;
+    align-content: center;
+    border: none;
+    border-radius: 4px;
+    width: 48%;
+    margin-left: 2px;
+    background-color: #8a59ae;
+    color: white;
+    cursor: pointer;
+}
+
+/* Stile per i pulsanti disabilitati */
+#quiz-button:disabled, #value-button:disabled {
+    background-color: #dddddd; /* Colore di sfondo per i pulsanti disabilitati */
+    color: #666666; /* Colore del testo per i pulsanti disabilitati */
+    cursor: not-allowed; /* Cambia il cursore quando il pulsante è disabilitato */
+}
+
+.quiz_div {
+    height: 83%;
 }

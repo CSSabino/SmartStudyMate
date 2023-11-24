@@ -2,13 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.ssm.smartstudymate.model.Cronologia" %>
 <%@ page import="com.ssm.smartstudymate.model.Chat" %>
-<%@ page import="com.ssm.smartstudymate.model.Docente" %><%--
-  Created by IntelliJ IDEA.
-  User: utente
-  Date: 23/11/2023
-  Time: 16:30
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.ssm.smartstudymate.model.Docente" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="it">
@@ -130,7 +124,7 @@
 
                 %>
 
-                <div class="message bot-message">Inizia a fare domande sulla lezione "<%=videolezioneSelezionata.getTitolo()%>"
+                <div class="message bot-message">Inizia a fare domande sulla lezione "<%=videolezioneSelezionata.getTitolo()%>".
                     <strong>NOTA BENE: </strong>Le risposte del modello potrebbero NON ESSERE SEMPRE corrette. Fornisci le domande in modo corretto al fine di ottenere una risposta più
                     accurata da parte le modello.</div>
 
