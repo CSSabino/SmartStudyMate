@@ -1,0 +1,57 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartStudyMate | SEARCH TOPIC</title>
+    <link rel="stylesheet" href="./css/home.css" type="text/css">
+    <script type="text/javascript" src="./js/search-topic.js" defer></script>
+</head>
+
+<body>
+
+<header>
+    <h1>Motore di ricerca per contenuto</h1>
+</header>
+
+<nav>
+    <a href="router-servlet?filejsp=home.jsp">Home</a>
+    <a href="#">Search Topic</a>
+    <a href="router-servlet?filejsp=quiz_mate.jsp">Quiz Mate</a>
+</nav>
+
+<div class="search-container">
+    <input type="text" id="search-input" placeholder="Cerca..." required>
+    <button id="search-button" onclick="search()">Cerca</button>
+</div>
+
+<div id="videolezione-container">
+
+    <%
+        String searchDone = (String) session.getAttribute("search_done");
+
+        if(searchDone != null && searchDone.equalsIgnoreCase("true")){
+            String urlVideoEmbeded = (String) session.getAttribute("url_video_embeded");
+            String summary = (String) session.getAttribute("summary");
+    %>
+
+    <iframe width="500" height="320" src="<%=urlVideoEmbeded%>" frameborder="0" allowfullscreen></iframe>
+    <p> <%=summary%> </p>
+
+    <%
+        } else {
+    %>
+        <p>
+            <h2>
+                Fornisci attraverso la barra di ricerca il topic che ti interessa.<br>In questo spazio verrà mostrata la videolezione
+                a partire dal minuto dal quale parte la spiegazione del topic che ti interessa. <strong>NOTA BENE: </strong>Le risposte del modello
+                non potrebbero sempre essere corrette.
+            </h2>
+        </p>
+    <%
+        }
+    %>
+</div>
+
+</body>
+</html>

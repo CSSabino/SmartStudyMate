@@ -26,8 +26,8 @@
 
 <nav>
     <a href="#">Home</a>
-    <a href="call-servlet?filejsp=search_topic.jsp">Search Topic</a>
-    <a href="call-servlet?filejsp=quiz_mate.jsp">Quiz Mate</a>
+    <a href="router-servlet?filejsp=search_topic.jsp">Search Topic</a>
+    <a href="router-servlet?filejsp=quiz_mate.jsp">Quiz Mate</a>
 </nav>
 
 <div class="container">
@@ -101,7 +101,7 @@
                 %>
 
                 <div class="message bot-message">Scegli una videolezione prima di poter chattare con me! <strong>NOTA BENE:</strong>Le risposte del modello
-                    non potrebbero sempre essere corrette. Fornisci le domande in modo corretto al fine di ottenere una risposta più
+                    non potrebbero sempre essere corrette. Fornisci le domande in modo corretto al fine di ottenere risposte più
                 accurate da parte le modello.</div>
 
                 <%
@@ -143,7 +143,7 @@
 
         <div id="message-form">
 
-            <input type="text" id="message-input" placeholder="Cosa dice il professore in merito a...">
+            <input type="text" id="message-input" placeholder="Cosa dice il professore in merito a..." required>
             <button id="button-chat" type="submit" onclick="sendMessage('<%=lessonSelected%>')">Invia</button>
 
         </div>

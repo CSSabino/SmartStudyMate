@@ -24,6 +24,11 @@ public class VideolezioneDAO {
                 videolezione.setDescrizione(resultSet.getString("descrizione"));
                 videolezione.setUrlVideo(resultSet.getString("url"));
                 videolezione.setUrlPhotoVideo(resultSet.getString("url_photo"));
+                videolezione.setAccessCode(resultSet.getString("access_code"));
+                videolezione.setIdVideoEmbeded(resultSet.getString("video_embeded"));
+
+                DocenteDAO docenteDAO = new DocenteDAO();
+                videolezione.setProprietario(docenteDAO.doRetrieveByEmail(docente.getEmail()));
 
                 videolezioni.add(videolezione);
             }
@@ -55,6 +60,8 @@ public class VideolezioneDAO {
                 videolezione.setDescrizione(resultSet.getString("descrizione"));
                 videolezione.setUrlVideo(resultSet.getString("url"));
                 videolezione.setUrlPhotoVideo(resultSet.getString("url_photo"));
+                videolezione.setAccessCode(resultSet.getString("access_code"));
+                videolezione.setIdVideoEmbeded(resultSet.getString("video_ebeded"));
 
                 videolezioni.add(videolezione);
             }
@@ -71,13 +78,14 @@ public class VideolezioneDAO {
 
         try(Connection connection = ConPool.getConnection()) {
             PreparedStatement ps =
-                    connection.prepareStatement("insert into videolezione (url, titolo, descrizione, url_photo, proprietario) " +
-                            "VALUES(?,?,?,?,?);");
+                    connection.prepareStatement("insert into videolezione (url, titolo, descrizione, url_photo, video_embeded, proprietario) " +
+                            "VALUES(?,?,?,?,?,?);");
             ps.setString(1, videolezione.getUrlVideo());
             ps.setString(2, videolezione.getTitolo());
             ps.setString(3, videolezione.getDescrizione());
             ps.setString(4, videolezione.getUrlPhotoVideo());
-            ps.setString(5, docente.getEmail());
+            ps.setString(5, videolezione.getIdVideoEmbeded());
+            ps.setString(6, docente.getEmail());
 
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("INSERT Error");
@@ -100,11 +108,15 @@ public class VideolezioneDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                videolezione = new Videolezione();
                 videolezione.setTitolo(resultSet.getString("titolo"));
                 videolezione.setDescrizione(resultSet.getString("descrizione"));
                 videolezione.setUrlVideo(resultSet.getString("url"));
                 videolezione.setUrlPhotoVideo(resultSet.getString("url_photo"));
+                videolezione.setAccessCode(resultSet.getString("access_code"));
+                videolezione.setIdVideoEmbeded(resultSet.getString("video_ebeded"));
+
+                DocenteDAO docenteDAO = new DocenteDAO();
+                videolezione.setProprietario(docenteDAO.doRetrieveByEmail(resultSet.getString("proprietario")));
             }
 
         } catch (

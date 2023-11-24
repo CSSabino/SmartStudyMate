@@ -144,11 +144,37 @@ nav a:hover {
     cursor: pointer;
 }
 
-footer {
+#message-form button:hover, #add_lesson:hover, #search-button:hover {
+    background-color: #9c73ba;
+}
+
+.search-container {
     text-align: center;
-    background-color: #333;
-    color: #fff;
-    bottom: 0;
-    width: 100%;
-    padding: 10px 0;
+    padding: 2em;
+}
+
+#videolezione-container {
+    text-align: center;
+    margin: 2em;
+}
+
+.search-container {
+    text-align: center;
+    padding: 2em;
+}
+
+#search-input {
+    padding: 0.5em;
+    width: 60%;
+    font-size: 16px;
+}
+
+#search-button {
+    padding: 8px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #8a59ae;
+    color: white;
+    cursor: pointer;
 }

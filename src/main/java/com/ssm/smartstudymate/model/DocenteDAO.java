@@ -78,4 +78,34 @@ public class DocenteDAO {
 
         return doRetrieve;
     }
+
+    public Docente doRetrieveByEmail(String email) {
+        Docente doRetrieve = new Docente();
+
+        try(Connection connection = ConPool.getConnection()){
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("SELECT * " +
+                            "FROM docente " +
+                            "WHERE email = ?;");
+
+
+            preparedStatement.setString(1, email);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()) {
+                doRetrieve.setEmail(resultSet.getString("email"));
+                doRetrieve.setNome(resultSet.getString("nome"));
+                doRetrieve.setCognome(resultSet.getString("cognome"));
+                doRetrieve.setPassword(resultSet.getString("passwordHash"));
+            }
+            else
+                return null;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return doRetrieve;
+    }
 }

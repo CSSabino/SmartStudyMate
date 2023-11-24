@@ -75,11 +75,76 @@ public class AggiungiLezioneServlet extends HttpServlet {
                     e.printStackTrace();
                 }
 
+                try {
+                    URL url = new URL("http://localhost:5001/returnIdVideo");
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+
+                    String messaggio = "lesson=" + urlVideolezione;
+                    byte[] postData = messaggio.getBytes(StandardCharsets.UTF_8);
+                    int postDataLength = postData.length;
+                    conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+
+                    try (OutputStream os = conn.getOutputStream()) {
+                        os.write(postData);
+                    }
+
+                    System.out.println("Messaggio inviato al server Python!");
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    String line;
+                    StringBuilder resp = new StringBuilder();
+
+                    while ((line = reader.readLine()) != null) {
+                        resp.append(line);
+                    }
+                    reader.close();
+
+                    System.out.println("Risposta dal server Python: " + resp.toString());
+
+                    String idVideo = "https://www.youtube.com/embed/"+resp.toString();
+                    videolezione.setIdVideoEmbeded(idVideo);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 videolezioneDAO.doSave(videolezione, docente);
 
                 ArrayList<Videolezione> playlist = videolezioneDAO.doRetrieveByDocente(docente);
 
                 session.setAttribute("videolezioni", playlist);
+
+                try {
+                    URL url = new URL("http://localhost:5002/insert_lesson");
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setDoOutput(true);
+
+                    String messaggio = "lesson=" + urlVideolezione;
+                    byte[] postData = messaggio.getBytes(StandardCharsets.UTF_8);
+                    int postDataLength = postData.length;
+                    conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+
+                    try (OutputStream os = conn.getOutputStream()) {
+                        os.write(postData);
+                    }
+
+                    System.out.println("Messaggio inviato al server Python!");
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    String line;
+                    StringBuilder resp = new StringBuilder();
+
+                    while ((line = reader.readLine()) != null) {
+                        resp.append(line);
+                    }
+                    reader.close();
+
+                    System.out.println("Risposta dal server Python: " + resp.toString());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 address = "router-servlet?filejsp=home.jsp";
 

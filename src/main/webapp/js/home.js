@@ -61,7 +61,7 @@ function sendMessage(lessonSelected){
 
     let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
         "<img src='./images/loading.gif' height='60' width='60'>" +
-        "</div>"
+        "<p> <strong>Non affidarsi completamente alla risposte del modello. La fonte affidabile resta il docente. </strong> </p> </div>"
     document.getElementById('chat').insertAdjacentHTML('beforeend', loadingImg);
 
     inputBox.value = "";

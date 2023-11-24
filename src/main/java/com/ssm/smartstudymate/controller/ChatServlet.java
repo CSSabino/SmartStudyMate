@@ -14,6 +14,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @WebServlet(name = "chatServlet", value = "/chat-servlet")
 public class ChatServlet extends HttpServlet {
@@ -47,7 +49,12 @@ public class ChatServlet extends HttpServlet {
             conn.setDoOutput(true);
 
             // Preparazione dei dati da inviare al server Python: la query fornita dall'utente
-            String dati = "query="+query;
+            // Formattazione stringa per passaggio tramite connessine HTTP
+            query = query.replace("'", " ");
+            query = query.replace("\"", "");
+            String parametroConAccenti = query;
+            String datiPost = URLEncoder.encode(parametroConAccenti, StandardCharsets.UTF_8.toString());
+            String dati = "query="+datiPost;
 
             // I dati vengono convertiti in un array di byte usando la codifica UTF-8.
             byte[] postData = dati.getBytes();
@@ -68,7 +75,7 @@ public class ChatServlet extends HttpServlet {
 
 
             // Viene creato un BufferedReader per leggere la risposta dal flusso di input della connessione.
-            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
 
             // Si creano una variabile per leggere ogni riga della risposta e un oggetto StringBuilder
             // per costruire la risposta completa.
@@ -88,6 +95,8 @@ public class ChatServlet extends HttpServlet {
             cronologia.recuperaChat(chatName).inviaMessaggio(resp.toString());
 
             chatResponse = resp.toString();
+
+            chatResponse = chatResponse.replace("\"", "");
 
             response.setContentType("text/plain;charset=UTF-8");
             response.getWriter().append("[");

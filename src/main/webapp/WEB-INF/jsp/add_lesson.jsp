@@ -21,11 +21,11 @@
     <form action="aggiungi-lezione" method="post">
 
         <label for="titolo">Titolo videolezione:</label>
-        <input type="text" id="titolo" name="titolo" placeholder="Inserisci titolo della videolezione">
+        <input type="text" id="titolo" name="titolo" placeholder="Inserisci titolo della videolezione" required>
         <label for="url">Url videolezione:</label>
-        <input type="text" id="url" name="url" placeholder="Inserisci URL della videolezione">
+        <input type="text" id="url" name="url" placeholder="Inserisci URL della videolezione" required>
         <label for="keytopic">Key-topic videolezione:</label>
-        <input type="text" id="keytopic" name="keytopic" placeholder="Inserisci gli argomenti trattati nella videolezione">
+        <input type="text" id="keytopic" name="keytopic" placeholder="Inserisci gli argomenti trattati nella videolezione" required>
 
         <%
             String presence = (String) session.getAttribute("lesson-presence");
