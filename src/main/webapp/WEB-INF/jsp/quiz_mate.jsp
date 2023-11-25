@@ -94,12 +94,12 @@
             <%
                 } else {
             %>
-            <div class="message bot-message">Scegli una videolezione prima poter rispondere al quiz. <strong>NOTA BENE:</strong>Le risposte del modello
+            <div class="message bot-message">Scegli una videolezione prima poter rispondere al quiz. <strong>NOTA BENE: </strong>Le risposte del modello
                 non potrebbero sempre essere corrette.</div>
-            </div>
             <%
                 }
             %>
+        </div>
         <div id="value-button-box">
             <%
                 if(videolezioneSelezionata == null){

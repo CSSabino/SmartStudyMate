@@ -1,6 +1,7 @@
 package com.ssm.smartstudymate.controller;
 
 import com.ssm.smartstudymate.model.Videolezione;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,6 +26,7 @@ public class SearchTopicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String topic = request.getParameter("topic");
+        String ripetizione = request.getParameter("ripetizione");
 
         try {
 
@@ -134,6 +136,12 @@ public class SearchTopicServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        if(ripetizione != null){
+            String address = "WEB-INF/jsp/search_topic.jsp";
+            RequestDispatcher dispatcher = request.getRequestDispatcher(address);
+            dispatcher.forward(request, response);
         }
     }
 }

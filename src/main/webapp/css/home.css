@@ -146,7 +146,7 @@ nav a:hover {
 
 #message-form button:hover, #add_lesson:hover,
 #search-button:hover, #crea_quiz:hover,
-#quiz-button:hover, #value-button:hover {
+#quiz-button:hover, #value-button:hover, #rivedilezioneButton:hover {
     background-color: #9c73ba;
 }
 
@@ -186,7 +186,7 @@ nav a:hover {
     display: flex;
 }
 
-#quiz-button, #value-button {
+#quiz-button, #value-button, #rivedilezioneButton {
     padding: 8px 15px;
     align-content: center;
     border: none;

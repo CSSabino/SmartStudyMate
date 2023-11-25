@@ -39,7 +39,7 @@ function zoomBlock(xmlhttp, numBlock, titoloLezione) {
 
     let divMessage = "";
 
-    divMessage = "<div class='message bot-message'>Adesso puoi creare quiz sulla videolezione selezionata! <strong>NOTA BENE:</strong>Le risposte del modello " +
+    divMessage = "<div class='message bot-message'>Adesso puoi creare quiz sulla videolezione selezionata! <br><strong>NOTA BENE: </strong>Le risposte del modello " +
             "non potrebbero sempre essere corrette.</div>";
 
     chat.innerHTML = divMessage
@@ -47,11 +47,59 @@ function zoomBlock(xmlhttp, numBlock, titoloLezione) {
 }
 
 function valutaRisposta() {
-    var domanda = document.getElementById("domanda");
-    var rispostaUtente = document.querySelector('input[name="risposta"]:checked');
+    var xmlhttp = new XMLHttpRequest();
+    var domanda = document.getElementById("domanda").textContent;
+    var rispostaUtente = document.querySelector('input[name="risposta"]:checked').value;
 
-    console.log(domanda.textContent + "////" + rispostaUtente.value);
+    let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
+        "<img src='images/loading.gif' height='60' width='60'>" +
+        "<h3>Valutazione del quiz in corso...<br> <strong>NOTA BENE: </strong>Le risposte del modello " +
+        "non potrebbero sempre essere corrette.</div><h3>" +
+        "</div>"
+    document.getElementById('quiz-container').innerHTML = loadingImg;
 
+    var parametri = "domanda="+domanda+"&risposta="+rispostaUtente;
+
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            valutaRipostaQuiz(this, domanda, rispostaUtente);
+        }
+    };
+
+    xmlhttp.open("POST", "valuta-quiz", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send(parametri);
+
+}
+
+function valutaRipostaQuiz(xmlhttp, domanda, risposta){
+    var json = JSON.parse(xmlhttp.responseText);
+    let htmlValutazione = "";
+
+    if(json != null && json.length > 0){
+        let valutazione = json[0].valutazione;
+        if(valutazione.toLowerCase() === "corretta"){
+            htmlValutazione += "<div id='divValutazione'>" +
+                "<p>Complimenti! La risposta \"" + risposta + "\" alla domanda \"" + domanda + "\" è corretta!<br>" +
+                "<strong>Genera un nuovo quiz!</strong></p>" +
+                "</div>";
+        } else {
+            htmlValutazione += "<div id='divValutazione'>" +
+                "<p>La risposta \"" + risposta + "\" alla domanda \"" + domanda + "\" non è corretta. Puoi generare " +
+                "un nuovo quiz oppure rivedere la lezione che parla dell'argomento della domanda" +
+                "</p>" +
+                "<form id='myform' action='search-topic' method='post'>" +
+                "<input type='hidden' name='topic' value='"+domanda+"'>" +
+                "<input type='hidden' name='ripetizione' value='true'>" +
+                "<button id='rivedilezioneButton' type='submit'>RIPETI L'ARGOMENTO</button> " +
+                "</form> " +
+                "</div>";
+        }
+    }
+
+    console.log(htmlValutazione);
+    document.getElementById("quiz-container").innerHTML = htmlValutazione;
+    document.getElementById("value-button").setAttribute("disabled", true);
 }
 
 function creaQuiz(){
@@ -60,7 +108,8 @@ function creaQuiz(){
 
     let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
         "<img src='images/loading.gif' height='60' width='60'>" +
-        "<h3>Creazione del quiz in corso...<h3>" +
+        "<h3>Creazione del quiz in corso...<br><strong>NOTA BENE: </strong>Le risposte del modello " +
+        "non potrebbero sempre essere corrette.</div><h3>" +
         "</div>"
     document.getElementById('quiz-container').innerHTML = loadingImg;
 
@@ -91,3 +140,11 @@ function requestQuiz(xmlhttp){
     document.getElementById("value-button").removeAttribute("disabled");
 }
 
+function toSearchTopicJsp(){
+    let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
+        "<img src='images/loading.gif' height='60' width='60'>" +
+        "<h3>Reindirizzamento al motore di ricerca per contenuto...<br> <strong>NOTA BENE: </strong>Le risposte del modello " +
+        "non potrebbero sempre essere corrette.</div><h3>" +
+        "</div>"
+    document.getElementById('quiz-container').innerHTML = loadingImg;
+}

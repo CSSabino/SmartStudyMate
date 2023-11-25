@@ -96,7 +96,7 @@
 
                 <div class="message bot-message">Scegli una videolezione prima di poter chattare con me! <strong>NOTA BENE:</strong>Le risposte del modello
                     non potrebbero sempre essere corrette. Fornisci le domande in modo corretto al fine di ottenere risposte più
-                accurate da parte le modello.</div>
+                accurate da parte del modello.</div>
 
                 <%
                 } else {
@@ -125,7 +125,7 @@
                 %>
 
                 <div class="message bot-message">Inizia a fare domande sulla lezione "<%=videolezioneSelezionata.getTitolo()%>".
-                    <strong>NOTA BENE: </strong>Le risposte del modello potrebbero NON ESSERE SEMPRE corrette. Fornisci le domande in modo corretto al fine di ottenere una risposta più
+                    <strong>NOTA BENE: </strong> Le risposte del modello potrebbero NON ESSERE SEMPRE corrette. Fornisci le domande in modo corretto al fine di ottenere una risposta più
                     accurata da parte le modello.</div>
 
                 <%
@@ -138,7 +138,17 @@
         <div id="message-form">
 
             <input type="text" id="message-input" placeholder="Cosa dice il professore in merito a..." required>
+            <%
+                if(lessonSelected != null){
+            %>
             <button id="button-chat" type="submit" onclick="sendMessage('<%=lessonSelected%>')">Invia</button>
+            <%
+                } else {
+            %>
+            <button id="button-chat" type="submit" disabled>Invia</button>
+            <%
+                }
+            %>
 
         </div>
 

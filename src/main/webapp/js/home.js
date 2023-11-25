@@ -5,7 +5,7 @@ function selectVideolesson(numberLesson, urlLezione){
 
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            zoomBlock(this, numberLesson);
+            zoomBlock(this, numberLesson, urlLezione);
         }
     };
 
@@ -15,7 +15,7 @@ function selectVideolesson(numberLesson, urlLezione){
 
 }
 
-function zoomBlock(xmlhttp, numBlock) {
+function zoomBlock(xmlhttp, numBlock, urlLezione) {
     var json = JSON.parse(xmlhttp.responseText);
     var block = document.getElementById("videolesson-block");
     var videoSelect = document.getElementById(numBlock);
@@ -39,12 +39,13 @@ function zoomBlock(xmlhttp, numBlock) {
                 divMessage += "<div class='message bot-message'>" + json[i].botResponse + "</div>";
         }
     } else {
-        divMessage = "<div class='message bot-message'>Adesso puoi iniziare a fare domande sulla videolezione selezionata! <strong>NOTA BENE:</strong>Le risposte del modello " +
+        divMessage = "<div class='message bot-message'>Adesso puoi iniziare a fare domande sulla videolezione selezionata! <strong>NOTA BENE: </strong>Le risposte del modello " +
             "non potrebbero sempre essere corrette. Fornisci le domande in modo corretto al fine di ottenere una risposta più " +
             "accurate da parte le modello.</div></div>";
     }
 
-    let funzione = "sendMessage('lesson" + numBlock + "')";
+    let funzione = "sendMessage('" + urlLezione + "')";
+    button.removeAttribute("disabled");
     button.setAttribute('onclick', funzione);
     chat.innerHTML = divMessage
 }
