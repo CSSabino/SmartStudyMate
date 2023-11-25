@@ -16,7 +16,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 @WebServlet(name = "quizCreatorServlet", value = "/quiz-servlet")

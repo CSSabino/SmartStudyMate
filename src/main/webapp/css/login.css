@@ -34,7 +34,16 @@ body {
     overflow: hidden;
 }
 
-#loginForm h2, #passwordForm h2, #videolezioneForm h2 {
+#quizForm {
+    max-height: 500px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#loginForm h2, #passwordForm h2, #videolezioneForm h2, #quizForm h2 {
     background-color: #8c8cff;
     color: #fff;
     padding: 20px;
@@ -47,13 +56,13 @@ form {
     text-align: left;
 }
 
-label {
+.label-form {
     display: block;
     font-size: 16px;
     margin-bottom: 8px;
 }
 
-input {
+.input-form {
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 15px;
@@ -63,6 +72,28 @@ input {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+}
+
+.quiz-input {
+    width: 80px;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    margin-left: 25px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#crea-file {
+    display: block;
+    margin: 0 auto;
+}
+
+.quiz-label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    margin-left: 45px;
 }
 
 p {

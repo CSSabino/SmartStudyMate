@@ -25,7 +25,7 @@ function zoomBlock(xmlhttp, numBlock, titoloLezione) {
     document.getElementById("quiz-button").removeAttribute("disabled");
 
     let htmlDivDocenteQuiz = "<p>" +
-                            "<form action='quizmoodleaiken-servlet' method='post'>" +
+                            "<form action='router-servlet?filejsp=form_quiz.jsp' method='post'>" +
                             "<button id='crea_quiz' name='quiz_button' type='submit'>Crea quiz sulla lezione \"" + titoloLezione + "\"</button>" +
                             "</form>" +
                             "</p>"

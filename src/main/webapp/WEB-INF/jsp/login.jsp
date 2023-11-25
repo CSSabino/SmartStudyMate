@@ -24,8 +24,8 @@
 <div id="loginForm">
     <h2>Accesso SmartStudyMate</h2>
     <form action="login" method="get">
-        <label for="accessCode">Codice di accesso (fornito dal docente):</label>
-        <input type="text" id="accessCode" name="accessCode" placeholder="Inserisci il codice di accesso" required>
+        <label class="label-form" for="accessCode">Codice di accesso (fornito dal docente):</label>
+        <input class="input-form" type="text" id="accessCode" name="accessCode" placeholder="Inserisci il codice di accesso" required>
         <%
             String successAccessCode = (String) session.getAttribute("success-access");
             if(successAccessCode != null && successAccessCode.equalsIgnoreCase("not ok")){
@@ -39,11 +39,11 @@
 
     <p><strong>Sei sei un docente, accedi con le tue credenziali.</strong></p>
     <form action="login" method="post">
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" placeholder="Inserisci il tuo indirizzo mail" required>
+        <label class="label-form" for="email">Email:</label>
+        <input class="input-form" type="text" id="email" name="email" placeholder="Inserisci il tuo indirizzo mail" required>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required>
+        <label class="label-form" for="password">Password:</label>
+        <input class="input-form" type="password" id="password" name="password" placeholder="Inserisci la tua password" required>
 
         <%
             String successLogin = (String) session.getAttribute("success-login");

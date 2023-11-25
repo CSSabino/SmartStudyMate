@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: utente
-  Date: 23/11/2023
-  Time: 10:19
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="it">
 <head>
@@ -23,8 +16,8 @@
 
     <form action="scelta-password" method="post">
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Inserisci la tua password">
+        <label class="label-form" for="password">Password:</label>
+        <input class="input-form" type="password" id="password" name="password" placeholder="Inserisci la tua password">
         <input type="hidden" name="email" value="<%=email%>">
         <p>La password deve essere lunga almeno 8 caratteri. Deve contenere almeno una lettere maiuscola, una minuscola, un numero ed un carattere speciale (._%+-).</p>
         <%

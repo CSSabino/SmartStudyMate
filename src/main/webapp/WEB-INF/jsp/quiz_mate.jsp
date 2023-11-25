@@ -42,7 +42,7 @@
                         Videolezione vd = videolezioneDAO.doRetrieveByUrl(lessonSelected);
             %>
                 <p>
-                    <form action="quizmoodleaiken-servlet" method="post">
+                    <form action="router-servlet?filejsp=form_quiz.jsp" method="post">
                         <button id="crea_quiz" name="quiz_button" type="submit">Crea quiz sulla lezione "<%=vd.getTitolo()%>"</button>
                     </form>
                 </p>
