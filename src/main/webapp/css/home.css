@@ -134,7 +134,7 @@ nav a:hover {
 }
 
 /* Stile per il pulsante "Invia" */
-#message-form button, #add_lesson, #crea_quiz {
+#message-form button, #add_lesson, #crea_quiz, #crea_general_quiz {
     padding: 8px 15px;
     margin-left: 10px;
     border: none;
@@ -145,7 +145,7 @@ nav a:hover {
 }
 
 #message-form button:hover, #add_lesson:hover,
-#search-button:hover, #crea_quiz:hover,
+#search-button:hover, #crea_quiz:hover, #crea_general_quiz:hover,
 #quiz-button:hover, #value-button:hover, #rivedilezioneButton:hover {
     background-color: #9c73ba;
 }

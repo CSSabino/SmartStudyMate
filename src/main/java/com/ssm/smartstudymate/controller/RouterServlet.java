@@ -14,7 +14,18 @@ public class RouterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String fileJsp = request.getParameter("filejsp");
 
+        String quizGenerale = request.getParameter("quiz_generale");
+
         String address = "WEB-INF/jsp/" + fileJsp;
+
+        request.getSession().removeAttribute("quizaiken");
+        request.getSession().removeAttribute("quizmoodle");
+        request.getSession().removeAttribute("download-disponibile");
+        request.getSession().removeAttribute("quiz_generale");
+
+        if(quizGenerale != null && quizGenerale.equalsIgnoreCase("true")){
+            request.getSession().setAttribute("quiz_generale", "true");
+        }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(address);
         dispatcher.forward(request, response);

@@ -26,7 +26,7 @@ public class DownloadServlet extends HttpServlet {
 
         // Imposta gli header per il download
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment; filename=myfile.txt");
+        response.setHeader("Content-Disposition", "attachment; filename="+nomeFile);
 
         // Leggi il file e invia i dati alla risposta
         int bytesRead;

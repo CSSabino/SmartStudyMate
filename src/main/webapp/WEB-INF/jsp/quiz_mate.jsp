@@ -27,36 +27,49 @@
     <div class="left-block">
         <!-- Blocco con immagini e scrollbar a destra -->
         <div id="videolesson-block" class="image-container">
-            <div id="crea_quiz_docente">
-            <%
-                ArrayList<Videolezione> playlist = (ArrayList<Videolezione>) session.getAttribute("videolezioni");
-                Docente docente = (Docente) session.getAttribute("utente");
-                Videolezione videolezioneSelezionata = null;
-                // URL della videolezione selezionata
-                String lessonSelected = (String) session.getAttribute("lesson-selected");
-                String codeForQuiz = (String) session.getAttribute("codeForQuiz");
+            <div>
+                <%
+                    ArrayList<Videolezione> playlist = (ArrayList<Videolezione>) session.getAttribute("videolezioni");
+                    Docente docente = (Docente) session.getAttribute("utente");
+                    Videolezione videolezioneSelezionata = null;
+                    // URL della videolezione selezionata
+                    String lessonSelected = (String) session.getAttribute("lesson-selected");
+                    String codeForQuiz = (String) session.getAttribute("codeForQuiz");
 
-                if(playlist != null){
-                    if(lessonSelected != null && docente != null){
-                        VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
-                        Videolezione vd = videolezioneDAO.doRetrieveByUrl(lessonSelected);
-            %>
+                    if(playlist != null){
+                        if(docente != null){
+                %>
                 <p>
-                    <form action="router-servlet?filejsp=form_quiz.jsp" method="post">
-                        <button id="crea_quiz" name="quiz_button" type="submit">Crea quiz sulla lezione "<%=vd.getTitolo()%>"</button>
-                    </form>
+                <form action="router-servlet?filejsp=form_quiz.jsp" method="post">
+                    <button id="crea_general_quiz" name="quiz_general_button" type="submit">Crea quiz sulle videolezioni</button>
+                    <input type="hidden" name="quiz_generale" value="true">
+                </form>
                 </p>
 
-            <%
-                }
-            %>
+                <%
+                    if(lessonSelected != null){
+                        VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
+                        Videolezione vd = videolezioneDAO.doRetrieveByUrl(lessonSelected);
+                %>
+                <div id="crea_quiz_docente">
+                    <p>
+                        <form action="router-servlet?filejsp=form_quiz.jsp" method="post">
+                            <button id="crea_quiz" name="quiz_button" type="submit">Crea quiz sulla lezione "<%=vd.getTitolo()%>"</button>
+                        </form>
+                    </p>
+                </div>
+
+                <%
+                        }
+                    }
+                %>
             </div>
-                    <%
-                    for(int i = 0; i < playlist.size(); i++){
-                        Videolezione videolezione = playlist.get(i);
-                        String titolo = videolezione.getTitolo().replace("'", "\\'");
-                        if(videolezione.getUrlVideo().equalsIgnoreCase(lessonSelected)){
-                            videolezioneSelezionata = videolezione;
+            <%
+                for(int i = 0; i < playlist.size(); i++){
+                    Videolezione videolezione = playlist.get(i);
+                    String titolo = videolezione.getTitolo().replace("'", "\\'");
+                    if(videolezione.getUrlVideo().equalsIgnoreCase(lessonSelected)){
+                        videolezioneSelezionata = videolezione;
 
             %>
             <div id="image-item<%=i%>" class="image-item">
@@ -90,9 +103,9 @@
             <%
                 if(codeForQuiz != null){
             %>
-                <%=codeForQuiz%>
+            <%=codeForQuiz%>
             <%
-                } else {
+            } else {
             %>
             <div class="message bot-message">Scegli una videolezione prima poter rispondere al quiz. <strong>NOTA BENE: </strong>Le risposte del modello
                 non potrebbero sempre essere corrette.</div>
@@ -106,7 +119,7 @@
             %>
             <button id="quiz-button" type="submit" onclick="creaQuiz()" disabled>Crea un quiz</button>
             <%
-                } else {
+            } else {
             %>
             <button id="quiz-button" type="submit" onclick="creaQuiz()">Crea un quiz</button>
             <%
@@ -114,11 +127,11 @@
 
                 if(codeForQuiz == null){
             %>
-                <button id="value-button" type="submit" onclick="valutaRisposta()" disabled>Valuta la tua risposta</button>
+            <button id="value-button" type="submit" onclick="valutaRisposta()" disabled>Valuta la tua risposta</button>
             <%
-                } else {
+            } else {
             %>
-                <button id="value-button" type="submit" onclick="valutaRisposta()">Valuta la tua risposta</button>
+            <button id="value-button" type="submit" onclick="valutaRisposta()">Valuta la tua risposta</button>
             <%
                 }
             %>

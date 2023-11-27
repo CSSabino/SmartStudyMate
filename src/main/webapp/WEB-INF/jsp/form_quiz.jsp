@@ -11,6 +11,10 @@
 </head>
 <body>
 
+<form action='router-servlet?filejsp=quiz_mate.jsp' method='post'>
+    <button type='submit'>TORNA INDIETRO</button>
+    </form>
+
 <%
     String lessonSelected = (String) session.getAttribute("lesson-selected");
     Videolezione videolezione = new Videolezione();
@@ -21,41 +25,63 @@
     }
 %>
 <div id="quizForm">
-    <h2>Come deve essere composto il tuo quiz?</h2>
 
-    <form action="quizmoodleaiken-servlet" method="post">
-        <br>
-        <label class="quiz-label" for="multiple_choice">Scelta multipla:</label>
-        <input class="quiz-input" type="number" id="multiple_choice" name="multiple_choice" min="0" max="10" value="0" required>
+    <%
+        String quizGenerale = (String) session.getAttribute("quiz_generale");
+        if(quizGenerale != null && quizGenerale.equalsIgnoreCase("true")){
+    %>
+        <h2>Come deve essere composto il tuo quiz?</h2>
+    <%
+        } else {
+    %>
+    <h2>Come deve essere composto il tuo quiz sulla lezione "<%=videolezione.getTitolo()%>"?</h2>
+    <%
+        }
+    %>
+    <div id="contentQuiz">
+        <form action="#" method="post">
+            <br>
+            <label class="quiz-label" for="multiple_choice">Scelta multipla:</label>
+            <input class="quiz-input" type="number" id="multiple_choice" name="multiple_choice" min="0" max="10" value="0" required>
 
-        <label class="quiz-label" for="true_false">Vero/Falso:</label>
-        <input class="quiz-input" type="number" id="true_false" name="true_false" min="0" max="10" value="0" required>
-        <br>
-        <label class="quiz-label" for="matching">Matching:</label>
-        <input class="quiz-input" type="number" id="matching" name="matching" min="0" max="10" value="0" required>
+            <label class="quiz-label" for="true_false">Vero/Falso:</label>
+            <input class="quiz-input" type="number" id="true_false" name="true_false" min="0" max="10" value="0" required>
+            <br>
+            <label class="quiz-label" for="matching">Matching:</label>
+            <input class="quiz-input" type="number" id="matching" name="matching" min="0" max="10" value="0" required>
 
-        <label class="quiz-label" for="short_answer">Short Answer:</label>
-        <input class="quiz-input" type="number" id="short_answer" name="short_answer" min="0" max="10" value="0" required>
-        <br>
-        <label class="quiz-label" for="numerical">Numerica:</label>
-        <input class="quiz-input" type="number" id="numerical" name="numerical" min="0" max="10" value="0" required>
+            <label class="quiz-label" for="short_answer">Short Answer:</label>
+            <input class="quiz-input" type="number" id="short_answer" name="short_answer" min="0" max="10" value="0" required>
+            <br>
+            <label class="quiz-label" for="numerical">Numerica:</label>
+            <input class="quiz-input" type="number" id="numerical" name="numerical" min="0" max="10" value="0" required>
 
-        <label class="quiz-label" for="essay">Essay:</label>
-        <input class="quiz-input" type="number" id="essay" name="essay" min="0" max="10" value="0" required>
-        <br><br>
-        <button id="crea-file" type="submit">Crea il file scaricabile del tuo quiz</button>
-    </form>
+            <label class="quiz-label" for="essay">Essay:</label>
+            <input class="quiz-input" type="number" id="essay" name="essay" min="0" max="10" value="0" required>
+            <br><br>
+            <%
+                if(quizGenerale != null && quizGenerale.equalsIgnoreCase("true")){
+            %>
+                <button id="crea-file" type="button" onclick="creaQuizMoodleAiken('generale')">Crea il file scaricabile del tuo quiz</button>
+            <%
+                } else {
+                    String titolo = videolezione.getTitolo().replace("'", "\\'");
+            %>
+                <button id="crea-file" type="button" onclick="creaQuizMoodleAiken('<%=titolo%>')">Crea il file scaricabile del tuo quiz</button>
+            <%
+                }
+            %>
+        </form>
+    </div>
     <div id="div-download">
         <%
             String downloadDisponibile = (String) session.getAttribute("download-disponibile");
             if(downloadDisponibile != null && downloadDisponibile.equalsIgnoreCase("true")){
                 String moodle = (String) session.getAttribute("quizmoodle");
                 String aiken = (String) session.getAttribute("quizaiken");
-                if(videolezione != null){
         %>
-        <p><strong>Download quiz sulla lezione "<%=videolezione.getTitolo()%>"</strong></p>
+        <p><strong>Scegli il formato desiderato e scarica il tuo quiz!</strong></p>
         <%
-            }
             if(moodle.equalsIgnoreCase("true")){
         %>
         <button id="crea-moodle" type="button" onclick="downloadFile('moodle.xml')">MOODLE</button>

@@ -23,6 +23,7 @@ public class QuizMoodleAikenServlet extends HttpServlet {
         String shortAnswer = request.getParameter("short_answer");
         String numerical = request.getParameter("numerical");
         String essay = request.getParameter("essay");
+        String tipoQuiz = request.getParameter("tipoQuiz");
         String quizAiken = "";
         String quizMoodle = "";
         HttpSession session = request.getSession();
@@ -31,7 +32,14 @@ public class QuizMoodleAikenServlet extends HttpServlet {
                 && shortAnswer.equalsIgnoreCase("0") && numerical.equalsIgnoreCase("0")
         && essay.equalsIgnoreCase("0")){
             try {
-                URL url = new URL("http://localhost:5001/quizAiken");
+                URL url = null;
+                if(tipoQuiz != null && tipoQuiz.equalsIgnoreCase("generale")){
+                    url = new URL("http://localhost:5002/quizAiken");
+                }
+                else {
+                    url = new URL("http://localhost:5001/quizAiken");
+                }
+
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
@@ -59,7 +67,7 @@ public class QuizMoodleAikenServlet extends HttpServlet {
                 creaFile(quizAiken, "aiken.txt");
                 System.out.println(quizAiken);
 
-                session.setAttribute("quizaiken", quizAiken);
+                session.setAttribute("quizaiken", "true");
 
                 // aggiunta sequenza di escape per passagio string a con JSON
                 quizAiken = quizAiken.replace("\"", "\\\"");
@@ -70,7 +78,16 @@ public class QuizMoodleAikenServlet extends HttpServlet {
         }
 
         try {
-            URL url = new URL("http://localhost:5001/quizMoodle");
+
+            URL url = null;
+
+            if(tipoQuiz != null && tipoQuiz.equalsIgnoreCase("generale")){
+                url = new URL("http://localhost:5002/quizMoodle");
+            }
+            else {
+                url = new URL("http://localhost:5001/quizMoodle");
+            }
+
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
@@ -115,17 +132,12 @@ public class QuizMoodleAikenServlet extends HttpServlet {
         response.getWriter().append("[");
 
         if(quizAiken.isEmpty())
-            response.getWriter().append("{\"quiz_moodle\" : \"" + quizMoodle + "\"}");
+            response.getWriter().append("{\"quiz_moodle\" : \"true\", \"quiz_aiken\" : \"false\"}");
         else
-            response.getWriter().append("{\"quiz_moodle\" : \"" + quizMoodle + "\", \"quiz_aiken\" : \"" + quizAiken + "\"}");
+            response.getWriter().append("{\"quiz_moodle\" : \"true\", \"quiz_aiken\" : \"true\"}");
 
         response.getWriter().append("]");
         session.setAttribute("download-disponibile", "true");
-
-        String address = "router-servlet?filejsp=form_quiz";
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher(address);
-        dispatcher.forward(request, response);
 
     }
 
