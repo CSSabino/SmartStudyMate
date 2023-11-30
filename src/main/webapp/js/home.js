@@ -1,5 +1,21 @@
-function selectVideolesson(numberLesson, urlLezione){
+function zoom(numberLesson){
+    var block = document.getElementById("videolesson-block");
+    var videoSelect = document.getElementById(numberLesson);
+    var videos = block.querySelectorAll('img');
 
+    for (var i = 0; i < videos.length; i++) {
+        videos[i].setAttribute("style", "");
+    }
+
+    videoSelect.setAttribute("style", "max-width: 100%; border: 3px solid green");
+
+    let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
+        "<img src='./images/loading.gif' height='60' width='60'>" +
+        "<p> <strong>Caricamento della videolezione in corso... </strong> </p> </div>"
+    document.getElementById('chat').innerHTML = loadingImg;
+}
+
+function selectVideolesson(numberLesson, urlLezione){
     var xmlhttp = new XMLHttpRequest();
     var parametro = "lesson=" + urlLezione;
 
@@ -17,17 +33,11 @@ function selectVideolesson(numberLesson, urlLezione){
 
 function zoomBlock(xmlhttp, numBlock, urlLezione) {
     var json = JSON.parse(xmlhttp.responseText);
-    var block = document.getElementById("videolesson-block");
-    var videoSelect = document.getElementById(numBlock);
-    var videos = block.querySelectorAll('img');
+    //var block = document.getElementById("videolesson-block");
+    //var videoSelect = document.getElementById(numBlock);
+    //var videos = block.querySelectorAll('img');
     var chat = document.getElementById("chat");
     var button = document.getElementById("button-chat");
-
-    for (var i = 0; i < videos.length; i++) {
-        videos[i].setAttribute("style", "");
-    }
-
-    videoSelect.setAttribute("style", "max-width: 100%");
 
     let divMessage = "";
 

@@ -7,7 +7,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>SmartStudyMate | HOME</title>
+    <title>SmartStudyMate | QUIZ MATE</title>
     <link rel="stylesheet" href="./css/home.css" type="text/css">
     <script type="text/javascript" src="./js/quiz_mate.js" defer></script>
 </head>
@@ -73,7 +73,7 @@
 
             %>
             <div id="image-item<%=i%>" class="image-item">
-                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=titolo%>" onclick="selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>', '<%=titolo%>')" style="max-width: 100%">
+                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=titolo%>" onclick="zoom(this.id), selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>', '<%=titolo%>')" style="max-width: 100%; border: 3px solid green">
                 <span><strong><%=videolezione.getTitolo()%></strong></span>
             </div>
 
@@ -82,7 +82,7 @@
             %>
 
             <div id="image-item<%=i%>" class="image-item">
-                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>"  onclick="selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>', '<%=titolo%>')">
+                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>"  onclick="zoom(this.id), selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>', '<%=titolo%>')">
                 <span><strong><%=videolezione.getTitolo()%></strong></span>
             </div>
 

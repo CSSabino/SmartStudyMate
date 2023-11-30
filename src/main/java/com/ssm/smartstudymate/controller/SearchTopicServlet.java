@@ -129,6 +129,7 @@ public class SearchTopicServlet extends HttpServlet {
             session.setAttribute("url_video_embeded", url_video);
 
             chatbotResponse = chatbotResponse.replace("\"", "");
+            chatbotResponse = chatbotResponse.replace("'", " ");
             response.setContentType("text/plain;charset=UTF-8");
             response.getWriter().append("[");
             response.getWriter().append("{\"summarization\" : \"" + chatbotResponse + "\", \"url_video\":\"" + url_video + "\"}");

@@ -20,15 +20,37 @@ import java.nio.charset.StandardCharsets;
 public class ValutaRispostaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String opzione1 = request.getParameter("opzione1");
+        String opzione2 = request.getParameter("opzione2");
+        String opzione3 = request.getParameter("opzione3");
+        String opzione4 = request.getParameter("opzione4");
         String domanda = request.getParameter("domanda");
         String risposta = request.getParameter("risposta");
 
+        // Preparazione dei dati da inviare al server Python: la query fornita dall'utente
+        // Formattazione stringa per passaggio tramite connessine HTTP
+        opzione1 = opzione1.replace("'", " ");
+        opzione1 = opzione1.replace("\"", "");
+        String parametroOpzione1 = opzione1;
+        opzione2 = opzione2.replace("'", " ");
+        opzione2 = opzione2.replace("\"", "");
+        String parametroOpzione2 = opzione2;
+        opzione3 = opzione3.replace("'", " ");
+        opzione3 = opzione3.replace("\"", "");
+        String parametroOpzione3 = opzione3;
+        opzione4 = opzione4.replace("'", " ");
+        opzione4 = opzione4.replace("\"", "");
+        String parametroOpzione4 = opzione4;
         domanda = domanda.replace("'", " ");
         domanda = domanda.replace("\"", "");
         String parametroDomanda = domanda;
         risposta = risposta.replace("'", " ");
         risposta = risposta.replace("\"", "");
         String parametroRisposta = risposta;
+        String datiOpzione1 = URLEncoder.encode(parametroOpzione1, StandardCharsets.UTF_8.toString());
+        String datiOpzione2 = URLEncoder.encode(parametroOpzione2, StandardCharsets.UTF_8.toString());
+        String datiOpzione3 = URLEncoder.encode(parametroOpzione3, StandardCharsets.UTF_8.toString());
+        String datiOpzione4 = URLEncoder.encode(parametroOpzione4, StandardCharsets.UTF_8.toString());
         String datiDomanda = URLEncoder.encode(parametroDomanda, StandardCharsets.UTF_8.toString());
         String datiRisposta = URLEncoder.encode(parametroRisposta, StandardCharsets.UTF_8.toString());
 
@@ -41,7 +63,9 @@ public class ValutaRispostaServlet extends HttpServlet {
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
 
-            String messaggio = "domanda="+datiDomanda+"&risposta="+datiRisposta;
+            String messaggio = "opzione1=" + datiOpzione1 + "&opzione2=" + datiOpzione2 + "&opzione3="
+                    + datiOpzione3 + "&opzione4=" + datiOpzione4 + "&domanda="
+                    + datiDomanda+"&risposta="+datiRisposta;
             byte[] postData = messaggio.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;
             conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));

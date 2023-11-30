@@ -44,7 +44,7 @@
                             videolezioneSelezionata = videolezione;
             %>
             <div id="image-item<%=i%>" class="image-item">
-                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>')" style="max-width: 100%">
+                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="zoom(this.id); selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>')" style="max-width: 100%; border: 3px solid green">
                 <span><strong><%=videolezione.getTitolo()%></strong></span>
             </div>
 
@@ -53,7 +53,7 @@
             %>
 
             <div id="image-item<%=i%>" class="image-item">
-                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>')">
+                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="zoom(this.id); selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>')">
                 <span><strong><%=videolezione.getTitolo()%></strong></span>
             </div>
 

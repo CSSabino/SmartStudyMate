@@ -11,7 +11,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 @WebServlet(name = "loginServlet", value = "/login")
@@ -48,8 +55,49 @@ public class LoginServlet extends HttpServlet {
                 VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
                 ArrayList<Videolezione> videolezioni = videolezioneDAO.doRetrieveByDocente(docente);
                 session.setAttribute("videolezioni", videolezioni);
+
+                if(!videolezioni.isEmpty()){
+                    String lastUrl = "no";
+                    for(int i=0; i< videolezioni.size(); i++){
+                        String urlVideolezione = videolezioni.get(i).getUrlVideo();
+                        if(i == videolezioni.size() - 1)
+                            lastUrl = "si";
+
+                        try {
+                            URL url = new URL("http://localhost:5002/initialize_list_urls");
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setRequestMethod("POST");
+                            conn.setDoOutput(true);
+
+                            String messaggio = "lesson=" + urlVideolezione + "&last=" + lastUrl;
+                            byte[] postData = messaggio.getBytes(StandardCharsets.UTF_8);
+                            int postDataLength = postData.length;
+                            conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+
+                            try (OutputStream os = conn.getOutputStream()) {
+                                os.write(postData);
+                            }
+
+                            System.out.println("Messaggio inviato al server Python!");
+                            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                            String line;
+                            StringBuilder resp = new StringBuilder();
+
+                            while ((line = reader.readLine()) != null) {
+                                resp.append(line);
+                            }
+                            reader.close();
+
+                            System.out.println("Risposta dal server Python: " + resp.toString());
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
                 session.setAttribute("success-login", "ok");
-                address = "/WEB-INF/jsp/home.jsp";
+                address = "router-servlet?filejsp=home.jsp";
 
             } else {
                 session.removeAttribute("success-access");

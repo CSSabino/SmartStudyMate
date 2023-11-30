@@ -61,7 +61,7 @@ function generateQuiz(xmlhttp){
         let moodle = json[0].quiz_moodle;
         let aiken = json[0].quiz_aiken;
         if(moodle === "true"){
-            htmlDownload += "<button id=\"crea-moodle\" type=\"button\" onclick=\"downloadFile('moodle.xml')\">MOODLE</button>";
+            htmlDownload += "<button id=\"crea-moodle\" type=\"button\" onclick=\"downloadFile('moodle.xml')\">MOODLE XML</button>";
         }
         if(aiken === "true"){
             htmlDownload += "<button id=\"crea-aiken\" type=\"button\" onclick=\"downloadFile('aiken.txt')\">AIKEN</button>";

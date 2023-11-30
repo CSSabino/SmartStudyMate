@@ -1,3 +1,21 @@
+function zoom(numberLesson){
+
+    var block = document.getElementById("videolesson-block");
+    var videoSelect = document.getElementById(numberLesson);
+    var videos = block.querySelectorAll('img');
+
+    for (var i = 0; i < videos.length; i++) {
+        videos[i].setAttribute("style", "");
+    }
+
+    videoSelect.setAttribute("style", "max-width: 100%; border: 3px solid green");
+
+    let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
+        "<img src='./images/loading.gif' height='60' width='60'>" +
+        "<p> <strong>Caricamento della videolezione in corso... </strong> </p> </div>"
+    document.getElementById('quiz-container').innerHTML = loadingImg;
+}
+
 function selectVideolesson(numberLesson, urlLezione, titoloLezione){
 
     var xmlhttp = new XMLHttpRequest();
@@ -16,9 +34,6 @@ function selectVideolesson(numberLesson, urlLezione, titoloLezione){
 }
 
 function zoomBlock(xmlhttp, numBlock, titoloLezione) {
-    var block = document.getElementById("videolesson-block");
-    var videoSelect = document.getElementById(numBlock);
-    var videos = block.querySelectorAll('img');
     var chat = document.getElementById("quiz-container");
     var divDocenteQuiz = document.getElementById("crea_quiz_docente");
 
@@ -30,12 +45,6 @@ function zoomBlock(xmlhttp, numBlock, titoloLezione) {
                             "</form>" +
                             "</p>"
 
-
-    for (var i = 0; i < videos.length; i++) {
-        videos[i].setAttribute("style", "");
-    }
-
-    videoSelect.setAttribute("style", "max-width: 100%");
 
     let divMessage = "";
 
@@ -49,6 +58,10 @@ function zoomBlock(xmlhttp, numBlock, titoloLezione) {
 function valutaRisposta() {
     var xmlhttp = new XMLHttpRequest();
     var domanda = document.getElementById("domanda").textContent;
+    var opzione1 = document.getElementById("opzione1").value;
+    var opzione2 = document.getElementById("opzione2").value;
+    var opzione3 = document.getElementById("opzione3").value;
+    var opzione4 = document.getElementById("opzione4").value;
     var rispostaUtente = document.querySelector('input[name="risposta"]:checked').value;
 
     let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
@@ -58,7 +71,8 @@ function valutaRisposta() {
         "</div>"
     document.getElementById('quiz-container').innerHTML = loadingImg;
 
-    var parametri = "domanda="+domanda+"&risposta="+rispostaUtente;
+    var parametri = "opzione1=" + opzione1 + "&opzione2=" + opzione2 + "&opzione3=" + opzione3 +
+        "&opzione4=" + opzione4 + "&domanda="+domanda+"&risposta="+rispostaUtente;
 
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -140,6 +154,7 @@ function requestQuiz(xmlhttp){
     document.getElementById("value-button").removeAttribute("disabled");
 }
 
+//NON UTILIZZATA AL MOMENTO
 function toSearchTopicJsp(){
     let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
         "<img src='images/loading.gif' height='60' width='60'>" +

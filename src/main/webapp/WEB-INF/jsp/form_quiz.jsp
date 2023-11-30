@@ -84,7 +84,7 @@
         <%
             if(moodle.equalsIgnoreCase("true")){
         %>
-        <button id="crea-moodle" type="button" onclick="downloadFile('moodle.xml')">MOODLE</button>
+        <button id="crea-moodle" type="button" onclick="downloadFile('moodle.xml')">MOODLE XML</button>
         <%
             }
             if(aiken.equalsIgnoreCase("true")){
