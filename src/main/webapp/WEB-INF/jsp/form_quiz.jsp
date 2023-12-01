@@ -11,10 +11,6 @@
 </head>
 <body>
 
-<form action='router-servlet?filejsp=quiz_mate.jsp' method='post'>
-    <button type='submit'>TORNA INDIETRO</button>
-    </form>
-
 <%
     String lessonSelected = (String) session.getAttribute("lesson-selected");
     Videolezione videolezione = new Videolezione();
@@ -39,7 +35,7 @@
         }
     %>
     <div id="contentQuiz">
-        <form action="#" method="post">
+        <form action="router-servlet?filejsp=quiz_mate.jsp" method="post">
             <br>
             <label class="quiz-label" for="multiple_choice">Scelta multipla:</label>
             <input class="quiz-input" type="number" id="multiple_choice" name="multiple_choice" min="0" max="10" value="0" required>
@@ -59,6 +55,9 @@
             <label class="quiz-label" for="essay">Essay:</label>
             <input class="quiz-input" type="number" id="essay" name="essay" min="0" max="10" value="0" required>
             <br><br>
+            <div class="form_quiz_button">
+
+                <button type='submit'>Indietro</button>
             <%
                 if(quizGenerale != null && quizGenerale.equalsIgnoreCase("true")){
             %>
@@ -71,6 +70,9 @@
             <%
                 }
             %>
+
+                <button id="reset" type="reset">Reset</button>
+        </div>
         </form>
     </div>
     <div id="div-download">

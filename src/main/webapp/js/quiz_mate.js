@@ -14,6 +14,11 @@ function zoom(numberLesson){
         "<img src='./images/loading.gif' height='60' width='60'>" +
         "<p> <strong>Caricamento della videolezione in corso... </strong> </p> </div>"
     document.getElementById('quiz-container').innerHTML = loadingImg;
+
+    var creaQuiz = document.getElementById("crea_quiz");
+
+    if(creaQuiz != null)
+        creaQuiz.setAttribute("disabled", true);
 }
 
 function selectVideolesson(numberLesson, urlLezione, titoloLezione){
@@ -53,6 +58,7 @@ function zoomBlock(xmlhttp, numBlock, titoloLezione) {
 
     chat.innerHTML = divMessage
     divDocenteQuiz.innerHTML = htmlDivDocenteQuiz;
+    document.getElementById("crea_quiz").removeAttribute("disabled");
 }
 
 function valutaRisposta() {

@@ -11,12 +11,15 @@
     <title>SmartStudyMate | HOME</title>
     <link rel="stylesheet" href="./css/home.css" type="text/css">
     <script type="text/javascript" src="./js/home.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
 <header>
     <h1>Ciao sono SmartStudyMate, il tuo amico intelligente per lo studio!</h1>
 </header>
+
+<a href="./logoutServlet" id="logout"><span>Logout <i class="fa fa-sign-out"></i></span></a>
 
 <nav>
     <a href="#">Home</a>
@@ -29,9 +32,20 @@
         <!-- Blocco con immagini e scrollbar a destra -->
         <div id="videolesson-block" class="image-container">
             <%
+                Docente docente = (Docente) session.getAttribute("utente");
+                if(docente != null){
+            %>
+            <div>
+                <a href="router-servlet?filejsp=add_lesson.jsp" id="add_lesson">Aggiungi videolezione</a>
+                <a href="./genera-codice" id="gen_code">Genera codice</a>
+            </div>
+            <br><br>
+            <%
+                }
+            %>
+            <%
                 ArrayList<Videolezione> playlist = (ArrayList<Videolezione>) session.getAttribute("videolezioni");
                 Videolezione videolezioneSelezionata = null;
-                Docente docente = (Docente) session.getAttribute("utente");
 
                 // URL della videolezione selezionata
                 String lessonSelected = (String) session.getAttribute("lesson-selected");
@@ -64,17 +78,6 @@
 
             %>
         </div>
-        <%
-            if(docente != null){
-        %>
-        <div>
-            <form action="router-servlet?filejsp=add_lesson.jsp" method="post">
-                <button id="add_lesson" type="submit">Aggiungi videolezione</button>
-            </form>
-        </div>
-        <%
-            }
-        %>
     </div>
 
     <div id="right-block" class="right-block">

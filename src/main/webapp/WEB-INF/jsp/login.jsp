@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartStudyMate</title>
     <link rel="stylesheet" href="./css/login.css" type="text/css">
+    <script type="text/javascript" src="./js/login.js" defer></script>
 </head>
 <body>
 
@@ -57,5 +58,22 @@
     </form>
 </div>
 
+
+<%
+    String matching = (String) session.getAttribute("matching");
+    System.out.println(matching);
+    if(matching != null && matching.equalsIgnoreCase("true")){
+
+%>
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <span class="close" id="closePopup">&times;</span>
+        <h2>AZIONE RIUSCITA</h2>
+        <p>Cambio password avvenuto correttamente!<br><br>Ora puoi accedere alla piattaforma inserendo le tue credenziali.</p>
+    </div>
+</div>
+<%
+    }
+%>
 </body>
 </html>

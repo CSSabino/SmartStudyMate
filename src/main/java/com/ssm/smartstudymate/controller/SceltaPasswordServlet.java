@@ -34,15 +34,15 @@ public class SceltaPasswordServlet extends HttpServlet {
             docente.setEmail(email);
             docente.setPassword(password);
             docenteDAO.doSavePassword(docente);
-            response.sendRedirect("./index.html");
+            address = "/WEB-INF/jsp/login.jsp";
         } else {
             session.setAttribute("matching", "false");
             address = "/WEB-INF/jsp/password.jsp";
-
-            RequestDispatcher dispatcher =
-                    request.getRequestDispatcher(address);
-
-            dispatcher.forward(request, response);
         }
+
+        RequestDispatcher dispatcher =
+                request.getRequestDispatcher(address);
+
+        dispatcher.forward(request, response);
     }
 }

@@ -10,12 +10,15 @@
     <title>SmartStudyMate | QUIZ MATE</title>
     <link rel="stylesheet" href="./css/home.css" type="text/css">
     <script type="text/javascript" src="./js/quiz_mate.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
 <header>
     <h1>Rispondi al quiz e valuta il tuo apprendimento!</h1>
 </header>
+
+<a href="./logoutServlet" id="logout"><span>Logout <i class="fa fa-sign-out"></i></span></a>
 
 <nav>
     <a href="router-servlet?filejsp=home.jsp">Home</a>
@@ -46,23 +49,25 @@
                 </form>
                 </p>
 
+                <div id="crea_quiz_docente">
                 <%
                     if(lessonSelected != null){
                         VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
                         Videolezione vd = videolezioneDAO.doRetrieveByUrl(lessonSelected);
                 %>
-                <div id="crea_quiz_docente">
+
                     <p>
                         <form action="router-servlet?filejsp=form_quiz.jsp" method="post">
                             <button id="crea_quiz" name="quiz_button" type="submit">Crea quiz sulla lezione "<%=vd.getTitolo()%>"</button>
                         </form>
                     </p>
-                </div>
 
                 <%
                         }
                     }
                 %>
+
+                </div>
             </div>
             <%
                 for(int i = 0; i < playlist.size(); i++){

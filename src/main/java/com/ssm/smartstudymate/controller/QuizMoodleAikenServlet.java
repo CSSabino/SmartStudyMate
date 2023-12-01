@@ -60,10 +60,14 @@ public class QuizMoodleAikenServlet extends HttpServlet {
 
                 while ((line = reader.readLine()) != null) {
                     resp.append(line);
+
+                    // Aggiungi una nuova riga al termine di ogni linea letta
+                    resp.append(System.lineSeparator());
                 }
                 reader.close();
 
                 quizAiken = resp.toString();
+                quizAiken = quizAiken.replace("    ", "");
                 creaFile(quizAiken, "aiken.txt");
                 System.out.println(quizAiken);
 
@@ -109,6 +113,9 @@ public class QuizMoodleAikenServlet extends HttpServlet {
 
             while ((line = reader.readLine()) != null) {
                 resp.append(line);
+
+                // Aggiungi una nuova riga al termine di ogni linea letta
+                resp.append(System.lineSeparator());
             }
             reader.close();
 
@@ -148,13 +155,13 @@ public class QuizMoodleAikenServlet extends HttpServlet {
         // Crea il percorso completo del file
         String filePath = destinationDir + File.separator + nomeFile;
 
-        // Crea il file e scrivi dei dati di esempio
-        try (FileWriter writer = new FileWriter(filePath)) {
+        // Scrivi nel file utilizzando BufferedWriter e FileWriter
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, StandardCharsets.UTF_8))) {
+            // Scrivi il contenuto nel file
             writer.write(content);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Errore durante la creazione del file.");
-            return;
+            System.out.println("Errore");
         }
 
         // Rispondi con un messaggio di successo
