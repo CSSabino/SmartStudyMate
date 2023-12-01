@@ -95,6 +95,26 @@ public class VideolezioneDAO {
         }
     }
 
+    public void doSaveAccessCode(String accessCode, Docente docente, Videolezione videolezione){
+
+        try(Connection connection = ConPool.getConnection()){
+
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("UPDATE videolezione SET access_code = ? " +
+                            "WHERE proprietario = ? AND url = ?;");
+
+            preparedStatement.setString(1, accessCode);
+            preparedStatement.setString(2, docente.getEmail());
+            preparedStatement.setString(3, videolezione.getUrlVideo());
+
+            if(preparedStatement.executeUpdate() != 1)
+                throw new RuntimeException("UPDATE ACCESS CODE VIDEOLEZIONE error");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Videolezione doRetrieveByUrl(String url){
         Videolezione videolezione = null;
 

@@ -100,3 +100,14 @@ function chatbotMessage(xmlhttp){
 
     chat.insertAdjacentHTML('beforeend', botMessage);
 }
+
+function copyText() {
+
+    var inputElement = document.getElementById("myInput");
+    /* Seleziona il testo all'interno dell'input */
+    inputElement.select();
+    /* Copia il testo negli appunti del sistema */
+    document.execCommand("copy");
+    /* Deseleziona il testo */
+    window.getSelection().removeAllRanges();
+}

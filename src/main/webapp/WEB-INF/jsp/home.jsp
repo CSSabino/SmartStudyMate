@@ -11,6 +11,7 @@
     <title>SmartStudyMate | HOME</title>
     <link rel="stylesheet" href="./css/home.css" type="text/css">
     <script type="text/javascript" src="./js/home.js" defer></script>
+    <script type="text/javascript" src="./js/login.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -27,6 +28,24 @@
     <a href="router-servlet?filejsp=quiz_mate.jsp">Quiz Mate</a>
 </nav>
 
+<%
+    ArrayList<Videolezione> playlist = (ArrayList<Videolezione>) session.getAttribute("videolezioni");
+    Videolezione videolezioneSelezionata = null;
+    String accessCode = (String) request.getAttribute("access-code");
+    if(accessCode != null){
+%>
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <span class="close" id="closePopup">&times;</span>
+        <h2>CODICE CREATO CORRETTAMENTE</h2>
+        <p>Copialo e forniscilo ai tuoi studente per consentire loro l'accesso a <strong>SmartStudyMate</strong></p>
+        <input type="text" id="myInput" value="<%=accessCode%>" readonly>
+        <button id="copy-button" onclick="copyText()">Copia testo</button>
+    </div>
+</div>
+<%
+    }
+%>
 <div class="container">
     <div class="left-block">
         <!-- Blocco con immagini e scrollbar a destra -->
@@ -37,16 +56,20 @@
             %>
             <div>
                 <a href="router-servlet?filejsp=add_lesson.jsp" id="add_lesson">Aggiungi videolezione</a>
-                <a href="./genera-codice" id="gen_code">Genera codice</a>
+                <%
+                    if(!playlist.isEmpty()){
+                %>
+                    <a href="./genera-codice" id="gen_code">Genera codice</a>
+                <%
+                    }
+                %>
+
             </div>
             <br><br>
             <%
                 }
             %>
             <%
-                ArrayList<Videolezione> playlist = (ArrayList<Videolezione>) session.getAttribute("videolezioni");
-                Videolezione videolezioneSelezionata = null;
-
                 // URL della videolezione selezionata
                 String lessonSelected = (String) session.getAttribute("lesson-selected");
 
