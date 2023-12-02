@@ -19,6 +19,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet(name = "aggiungiLezioneServlet", value = "/aggiungi-lezione")
 public class AggiungiLezioneServlet extends HttpServlet {
@@ -28,6 +30,8 @@ public class AggiungiLezioneServlet extends HttpServlet {
         String urlVideolezione = request.getParameter("url");
         String descrizioneVideolezione = request.getParameter("keytopic");
 
+        String urlFormattato = "https://www.youtube.com/watch?v=" + getVideoIdFromUrl(urlVideolezione);
+
         HttpSession session = request.getSession();
         Docente docente = (Docente) session.getAttribute("utente");
         String address = "";
@@ -35,7 +39,7 @@ public class AggiungiLezioneServlet extends HttpServlet {
         if (docente != null) {
 
             VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
-            Videolezione videolezione = new Videolezione(titoloVideolezione, urlVideolezione, descrizioneVideolezione);
+            Videolezione videolezione = new Videolezione(titoloVideolezione, urlFormattato, descrizioneVideolezione);
 
             if (videolezioneDAO.doRetrieveByUrl(urlVideolezione) == null) {
 
@@ -159,5 +163,43 @@ public class AggiungiLezioneServlet extends HttpServlet {
                 request.getRequestDispatcher(address);
 
         dispatcher.forward(request, response);
+    }
+
+    public static String getVideoIdFromUrl(String youtubeUrl) {
+        try {
+            URL url = new URL(youtubeUrl);
+
+            Map<String, String> params = getQueryParams(url.getQuery());
+
+            if (url.getHost().equals("www.youtube.com") || url.getHost().equals("youtube.com")) {
+                if (params.containsKey("v")) {
+                    return params.get("v");
+                } else {
+                    String[] pathSegments = url.getPath().split("/");
+                    return pathSegments[pathSegments.length - 1];
+                }
+            } else if (url.getHost().equals("youtu.be")) {
+                return url.getPath().substring(1); // Remove leading '/'
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private static Map<String, String> getQueryParams(String query) {
+        Map<String, String> params = new HashMap<>();
+        if (query != null) {
+            String[] pairs = query.split("&");
+            for (String pair : pairs) {
+                String[] keyValue = pair.split("=");
+                if (keyValue.length > 1) {
+                    params.put(keyValue[0], keyValue[1]);
+                }
+            }
+        }
+        return params;
     }
 }
