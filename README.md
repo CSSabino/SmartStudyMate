@@ -4,16 +4,16 @@
 
 SmartStudyMate è il risultato dello studio di tesi condotto dallo studente Sabato Malafronte dell'Università degli Studi di Salerno.
 
-L'oggetto della tesi è stato lo studio dell'uso di LangChain nella costruzione di applicazioni che si basano sui Large Language Model.
+L'oggetto della tesi è stato lo studio dell'uso di LangChain nella costruzione di applicazioni in ambito educativo che si basano sui Large Language Model.
 
-Il nome SmartStudyMate nasce per il ruolo che svolge il software Il nome SmartStudyMate nasce per il ruolo che svolge il software nel supporto agli studenti nel loro processo di apprendimento, come se si avesse a disposizione un amico intelligente al quale poter chiedere aiuto sugli argomenti trattati durante un corso. 
+Il nome "SmartStudyMate" nasce per il ruolo che svolge il software nel supporto agli studenti nel loro processo di apprendimento, come se si avesse a disposizione un amico intelligente al quale poter chiedere aiuto sugli argomenti trattati durante un corso. 
 
 I docenti che hanno avuto modo di condurre corsi online ed hanno a disposizione le registrazioni delle proprie lezioni, possono caricare queste ultime su SmartStudyMate (SSM) e consentire ai propri studenti di poter interagire con il contenuto.
 
 # Realizzazione di SmartStudyMate
 
-SmartStudyMate è una web app prototipo ha visto l’utilizzo di Java e Flask per il back-end; HTML, CSS e JavaScript per il front-end. Il lavoro pi`u massiccio é svolto sicuramente dal programma realizzato con l’ausilio del linguaggio Python. Questa applicazione, sviluppata con il framework LangChain, contiene tutta la logica necessaria per l’interazione con ChatGPT.
-Il software è stato sviluppato con l'IDE IntelliJ per la parte relativa al web, con l'IDE PyCharm per la parte relativa all'interazone con il modello di linguaggio.
+SmartStudyMate è una web app prototipo che ha visto l’utilizzo di Java e Flask per lo sviluppo del back-end; HTML, CSS e JavaScript per il front-end. Il lavoro pi`u massiccio é svolto sicuramente dal programma realizzato con l’ausilio del linguaggio Python. Questa applicazione, sviluppata con il framework LangChain, contiene tutta la logica necessaria per l’interazione con ChatGPT.
+Il software è stato sviluppato con l'IDE IntelliJ per la parte relativa al web, con l'IDE PyCharm per la parte relativa all'interazione con il modello di linguaggio.
 
 # Installazione di SmartStudyMate
 
@@ -36,7 +36,7 @@ Link: https://github.com/CSSabino/SmartStudyMate
 
 ## Selezione del progetto clonato
 
-Una volta clonato il progetto in locale, aprire l'IDE IntelliJ (o qualsiasi altro IDE) e cliccare su "Open" per aprire il progetto appena clonato:
+Una volta clonato il progetto in locale, avvia l'IDE IntelliJ (o qualsiasi altro IDE) e cliccare su "Open" per aprire il progetto appena clonato:
 
 ![SSM](img_installazione/open%20project.jpg)
 
@@ -64,7 +64,7 @@ Clicca su "install requirements" per installare i package necessari per l'esecuz
 
 ![SSM](img_installazione/install%20package.jpg)
 
-Attendi che i package vengo correttamente installati. Successivamente passa di nuovo su IntelliJ.
+Attendi che i package vengo correttamente installati. Successivamente, passa su IntelliJ.
 
 ## Build del progetto
 
