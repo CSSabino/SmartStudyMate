@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/home.css" type="text/css">
     <script type="text/javascript" src="./js/quiz_mate.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -28,9 +29,9 @@
 
 <div class="container">
     <div class="left-block">
-        <!-- Blocco con immagini e scrollbar a destra -->
         <div id="videolesson-block" class="image-container">
             <div>
+                <br>
                 <%
                     ArrayList<Videolezione> playlist = (ArrayList<Videolezione>) session.getAttribute("videolezioni");
                     Docente docente = (Docente) session.getAttribute("utente");
@@ -42,32 +43,34 @@
                     if(playlist != null){
                         if(docente != null){
                 %>
-                <p>
+
                 <form action="router-servlet?filejsp=form_quiz.jsp" method="post">
                     <button id="crea_general_quiz" name="quiz_general_button" type="submit">Crea quiz sulle videolezioni</button>
                     <input type="hidden" name="quiz_generale" value="true">
                 </form>
-                </p>
-
+                <br>
                 <div id="crea_quiz_docente">
-                <%
-                    if(lessonSelected != null){
-                        VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
-                        Videolezione vd = videolezioneDAO.doRetrieveByUrl(lessonSelected);
-                %>
+                    <%
+                        if(lessonSelected != null){
+                            VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
+                            Videolezione vd = videolezioneDAO.doRetrieveByUrl(lessonSelected);
+                    %>
 
-                    <p>
-                        <form action="router-servlet?filejsp=form_quiz.jsp" method="post">
-                            <button id="crea_quiz" name="quiz_button" type="submit">Crea quiz sulla lezione "<%=vd.getTitolo()%>"</button>
-                        </form>
-                    </p>
 
-                <%
+                    <form action="router-servlet?filejsp=form_quiz.jsp" method="post">
+                        <button id="crea_quiz" name="quiz_button" type="submit">Crea quiz sulla lezione "<%=vd.getTitolo()%>"</button>
+                    </form>
+                    <br>
+
+                    <%
                         }
+                    %>
+                </div>
+                <%
                     }
                 %>
 
-                </div>
+
             </div>
             <%
                 for(int i = 0; i < playlist.size(); i++){
@@ -78,7 +81,7 @@
 
             %>
             <div id="image-item<%=i%>" class="image-item">
-                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=titolo%>" onclick="zoom(this.id), selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>', '<%=titolo%>')" style="max-width: 100%; border: 3px solid green">
+                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=titolo%>" onclick="zoom(this.id), selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>', '<%=titolo%>')" style="max-width: 100%; border: 3px solid red">
                 <span><strong><%=videolezione.getTitolo()%></strong></span>
             </div>
 
@@ -100,6 +103,7 @@
     </div>
 
     <div id="right-block" class="right-block">
+
         <div id="intestazione-chat">
             <h1>Rispondi al quiz</h1>
         </div>
@@ -112,7 +116,7 @@
             <%
             } else {
             %>
-            <div class="message bot-message">Scegli una videolezione prima poter rispondere al quiz. <strong>NOTA BENE: </strong>Le risposte del modello
+            <div class="message bot-message">Scegli una videolezione prima di poter rispondere al quiz. <strong>NOTA BENE: </strong>Le risposte del modello
                 non potrebbero sempre essere corrette.</div>
             <%
                 }

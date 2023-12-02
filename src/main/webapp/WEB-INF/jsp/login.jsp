@@ -14,13 +14,14 @@
     <title>SmartStudyMate</title>
     <link rel="stylesheet" href="./css/login.css" type="text/css">
     <script type="text/javascript" src="./js/login.js" defer></script>
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
 </head>
 <body>
 
 <div id="smartstudymate">
     <h1>Scopri SmartStudyMate, lo strumento intelligente nell'ambito dell'educazione!</h1>
-    <h4>Se sei uno studente hai la possibilità di interrogare le videolezioni, ricercare gli argomenti trattati nella videolezione, creare e rispondre a quiz.</h4>
-    <h4>Se sei un insegnate hai la possibilità di caricare le videolezioni, testare la bontà dell'applicazione sulle tue videolezioni, creare quiz ed esportali in formato Moodle XML (o anche in formato Aiken).</h4>
+    <h4>Se sei uno studente, hai la possibilità di interrogare le videolezioni, ricercare gli argomenti trattati nelle videolezioni, creare e rispondre a quiz.</h4>
+    <h4>Se sei un insegnate, hai la possibilità di caricare le tue videolezioni, testare la bontà dell'applicazione sulle tue videolezioni, creare quiz ed esportali in formato Moodle XML (o, anche, in formato Aiken).</h4>
 </div>
 <div id="loginForm">
     <h2>Accesso SmartStudyMate</h2>

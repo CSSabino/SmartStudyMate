@@ -8,6 +8,7 @@
     <title>SmartStudyMate</title>
     <link rel="stylesheet" href="./css/login.css" type="text/css">
     <script type="text/javascript" src="./js/form_quiz.js" defer></script>
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
 </head>
 <body>
 

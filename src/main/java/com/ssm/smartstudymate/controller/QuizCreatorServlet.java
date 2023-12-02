@@ -57,6 +57,7 @@ public class QuizCreatorServlet extends HttpServlet {
 
             // aggiunta sequenza di escape per passagio string a con JSON
             quiz = quiz.replace("\"", "\\\"");
+            quiz = quiz.replace("'", " ");
 
             response.setContentType("text/plain;charset=UTF-8");
             response.getWriter().append("[");

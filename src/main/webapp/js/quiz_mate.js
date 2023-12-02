@@ -8,7 +8,7 @@ function zoom(numberLesson){
         videos[i].setAttribute("style", "");
     }
 
-    videoSelect.setAttribute("style", "max-width: 100%; border: 3px solid green");
+    videoSelect.setAttribute("style", "max-width: 100%; border: 3px solid red");
 
     let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
         "<img src='./images/loading.gif' height='60' width='60'>" +
@@ -44,11 +44,10 @@ function zoomBlock(xmlhttp, numBlock, titoloLezione) {
 
     document.getElementById("quiz-button").removeAttribute("disabled");
 
-    let htmlDivDocenteQuiz = "<p>" +
-                            "<form action='router-servlet?filejsp=form_quiz.jsp' method='post'>" +
+    let htmlDivDocenteQuiz = "<form action='router-servlet?filejsp=form_quiz.jsp' method='post'>" +
                             "<button id='crea_quiz' name='quiz_button' type='submit'>Crea quiz sulla lezione \"" + titoloLezione + "\"</button>" +
                             "</form>" +
-                            "</p>"
+                            "<br>"
 
 
     let divMessage = "";
@@ -108,7 +107,7 @@ function valutaRipostaQuiz(xmlhttp, domanda, risposta){
                 "<p>La risposta \"" + risposta + "\" alla domanda \"" + domanda + "\" non è corretta. Puoi generare " +
                 "un nuovo quiz oppure rivedere la lezione che parla dell'argomento della domanda" +
                 "</p>" +
-                "<form id='myform' action='search-topic' method='post'>" +
+                "<form id='myform' action='search-topic' method='post' onsubmit='toSearchTopicJsp()'>" +
                 "<input type='hidden' name='topic' value='"+domanda+"'>" +
                 "<input type='hidden' name='ripetizione' value='true'>" +
                 "<button id='rivedilezioneButton' type='submit'>RIPETI L'ARGOMENTO</button> " +
@@ -167,5 +166,7 @@ function toSearchTopicJsp(){
         "<h3>Reindirizzamento al motore di ricerca per contenuto...<br> <strong>NOTA BENE: </strong>Le risposte del modello " +
         "non potrebbero sempre essere corrette.</div><h3>" +
         "</div>"
-    document.getElementById('quiz-container').innerHTML = loadingImg;
+    document.getElementById('quiz-container').insertAdjacentHTML('beforeend', loadingImg);;
+
+    return true;
 }

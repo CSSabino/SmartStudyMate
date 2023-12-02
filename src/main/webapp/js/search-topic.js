@@ -6,7 +6,7 @@ function search() {
     var divVideo = document.getElementById('videolezione-container');
     let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
         "<img src='images/loading.gif' height='60' width='60'>" +
-        "<p>Ricerca in corso... <strong>NOTA BENE: </strong> non affidarsi al 100% al modello.</p>" +
+        "<p>Ricerca in corso... <strong>NOTA BENE: </strong> non affidarsi sempre al modello.</p>" +
         "</div>"
     divVideo.innerHTML = loadingImg;
 

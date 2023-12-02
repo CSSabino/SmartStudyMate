@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/home.css" type="text/css">
     <script type="text/javascript" src="./js/search-topic.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -46,8 +47,8 @@
     %>
         <p>
             <h2>
-                Fornisci attraverso la barra di ricerca il topic che ti interessa.<br>In questo spazio verrà mostrata la videolezione
-                a partire dal minuto dal quale parte la spiegazione del topic che ti interessa. <strong>NOTA BENE: </strong>Le risposte del modello
+                Fornisci attraverso la barra di ricerca l'argomento che ti interessa.<br>In questo spazio verrà mostrata la videolezione
+                a partire dal minuto nel quale inizia la spiegazione dell'argomento che ti interessa. <strong>NOTA BENE: </strong>Le risposte del modello
                 non potrebbero sempre essere corrette.
             </h2>
         </p>

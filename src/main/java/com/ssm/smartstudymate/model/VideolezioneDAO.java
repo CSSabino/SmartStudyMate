@@ -61,7 +61,7 @@ public class VideolezioneDAO {
                 videolezione.setUrlVideo(resultSet.getString("url"));
                 videolezione.setUrlPhotoVideo(resultSet.getString("url_photo"));
                 videolezione.setAccessCode(resultSet.getString("access_code"));
-                videolezione.setIdVideoEmbeded(resultSet.getString("video_ebeded"));
+                videolezione.setIdVideoEmbeded(resultSet.getString("video_embeded"));
 
                 videolezioni.add(videolezione);
             }

@@ -1,5 +1,8 @@
 package com.ssm.smartstudymate.controller;
 
+import com.ssm.smartstudymate.model.Docente;
+import com.ssm.smartstudymate.model.Videolezione;
+import com.ssm.smartstudymate.model.VideolezioneDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,7 +14,9 @@ import jakarta.servlet.http.HttpSession;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 @WebServlet(name = "quizMoodleAikenServlet", value = "/quizmoodleaiken-servlet")
 public class QuizMoodleAikenServlet extends HttpServlet {
@@ -33,10 +38,26 @@ public class QuizMoodleAikenServlet extends HttpServlet {
         && essay.equalsIgnoreCase("0")){
             try {
                 URL url = null;
+                VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
+                String argomenti = "";
+
                 if(tipoQuiz != null && tipoQuiz.equalsIgnoreCase("generale")){
+                    Docente docente = (Docente) session.getAttribute("utente");
+
+                    ArrayList<Videolezione> videolezioni = videolezioneDAO.doRetrieveByDocente(docente);
+
+                    for(int i=0; i<videolezioni.size(); i++)
+                        argomenti += videolezioni.get(i).getDescrizione() + " ";
+
                     url = new URL("http://localhost:5002/quizAiken");
                 }
                 else {
+                    String lesson_selected = (String) session.getAttribute("lesson-selected");
+
+                    Videolezione videolezione = videolezioneDAO.doRetrieveByUrl(lesson_selected);
+
+                    argomenti = videolezione.getDescrizione();
+
                     url = new URL("http://localhost:5001/quizAiken");
                 }
 
@@ -44,7 +65,14 @@ public class QuizMoodleAikenServlet extends HttpServlet {
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
 
-                String messaggio = "multiple=" + multiple;
+                // Preparazione dei dati da inviare al server Python: la query fornita dall'utente
+                // Formattazione stringa per passaggio tramite connessine HTTP
+                argomenti = argomenti.replace("'", " ");
+                argomenti = argomenti.replace("\"", "");
+                String parametroConAccenti = argomenti;
+                String datiPost = URLEncoder.encode(parametroConAccenti, StandardCharsets.UTF_8.toString());
+
+                String messaggio = "multiple=" + multiple + "&argomenti=" + datiPost;
                 byte[] postData = messaggio.getBytes(StandardCharsets.UTF_8);
                 int postDataLength = postData.length;
                 conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
@@ -84,11 +112,26 @@ public class QuizMoodleAikenServlet extends HttpServlet {
         try {
 
             URL url = null;
+            VideolezioneDAO videolezioneDAO = new VideolezioneDAO();
+            String argomenti = "";
 
             if(tipoQuiz != null && tipoQuiz.equalsIgnoreCase("generale")){
+                Docente docente = (Docente) session.getAttribute("utente");
+
+                ArrayList<Videolezione> videolezioni = videolezioneDAO.doRetrieveByDocente(docente);
+
+                for(int i=0; i<videolezioni.size(); i++)
+                    argomenti += videolezioni.get(i).getDescrizione() + " ";
+
                 url = new URL("http://localhost:5002/quizMoodle");
             }
             else {
+                String lesson_selected = (String) session.getAttribute("lesson-selected");
+
+                Videolezione videolezione = videolezioneDAO.doRetrieveByUrl(lesson_selected);
+
+                argomenti = videolezione.getDescrizione();
+
                 url = new URL("http://localhost:5001/quizMoodle");
             }
 
@@ -96,8 +139,16 @@ public class QuizMoodleAikenServlet extends HttpServlet {
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
 
+            // Preparazione dei dati da inviare al server Python: la query fornita dall'utente
+            // Formattazione stringa per passaggio tramite connessine HTTP
+            argomenti = argomenti.replace("'", " ");
+            argomenti = argomenti.replace("\"", "");
+            String parametroConAccenti = argomenti;
+            String datiPost = URLEncoder.encode(parametroConAccenti, StandardCharsets.UTF_8.toString());
+
             String messaggio = "multiple=" + multiple + "&truefalse=" + truefalse + "&matching=" + matching +
-                    "&shortanswer=" + shortAnswer + "&numerical=" + numerical + "&essay=" + essay;
+                    "&shortanswer=" + shortAnswer + "&numerical=" + numerical + "&essay=" + essay +
+                    "&argomenti=" + datiPost;
             byte[] postData = messaggio.getBytes(StandardCharsets.UTF_8);
             int postDataLength = postData.length;
             conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));

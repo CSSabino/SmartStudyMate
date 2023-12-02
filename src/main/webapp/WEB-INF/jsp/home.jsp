@@ -13,6 +13,7 @@
     <script type="text/javascript" src="./js/home.js" defer></script>
     <script type="text/javascript" src="./js/login.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -81,7 +82,7 @@
                             videolezioneSelezionata = videolezione;
             %>
             <div id="image-item<%=i%>" class="image-item">
-                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="zoom(this.id); selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>')" style="max-width: 100%; border: 3px solid green">
+                <img id="<%=i%>" src="<%=videolezione.getUrlPhotoVideo()%>" alt="<%=videolezione.getTitolo()%>" onclick="zoom(this.id); selectVideolesson(this.id, '<%=videolezione.getUrlVideo()%>')" style="max-width: 100%; border: 3px solid red">
                 <span><strong><%=videolezione.getTitolo()%></strong></span>
             </div>
 
@@ -120,7 +121,7 @@
                     if(chat == null){
                 %>
 
-                <div class="message bot-message">Scegli una videolezione prima di poter chattare con me! <strong>NOTA BENE:</strong>Le risposte del modello
+                <div class="message bot-message">Scegli una videolezione prima di poter chattare con me! <strong>NOTA BENE: </strong>Le risposte del modello
                     non potrebbero sempre essere corrette. Fornisci le domande in modo corretto al fine di ottenere risposte più
                 accurate da parte del modello.</div>
 
@@ -152,7 +153,7 @@
 
                 <div class="message bot-message">Inizia a fare domande sulla lezione "<%=videolezioneSelezionata.getTitolo()%>".
                     <strong>NOTA BENE: </strong> Le risposte del modello potrebbero NON ESSERE SEMPRE corrette. Fornisci le domande in modo corretto al fine di ottenere una risposta più
-                    accurata da parte le modello.</div>
+                    accurata da parte del modello.</div>
 
                 <%
                         }

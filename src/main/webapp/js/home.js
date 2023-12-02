@@ -7,7 +7,7 @@ function zoom(numberLesson){
         videos[i].setAttribute("style", "");
     }
 
-    videoSelect.setAttribute("style", "max-width: 100%; border: 3px solid green");
+    videoSelect.setAttribute("style", "max-width: 100%; border: 3px solid red");
 
     let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
         "<img src='./images/loading.gif' height='60' width='60'>" +
@@ -51,7 +51,7 @@ function zoomBlock(xmlhttp, numBlock, urlLezione) {
     } else {
         divMessage = "<div class='message bot-message'>Adesso puoi iniziare a fare domande sulla videolezione selezionata! <strong>NOTA BENE: </strong>Le risposte del modello " +
             "non potrebbero sempre essere corrette. Fornisci le domande in modo corretto al fine di ottenere una risposta più " +
-            "accurate da parte le modello.</div></div>";
+            "accurata da parte del modello.</div></div>";
     }
 
     let funzione = "sendMessage('" + urlLezione + "')";
@@ -72,7 +72,7 @@ function sendMessage(lessonSelected){
 
     let loadingImg = "<div id='loadingDiv' class='message bot-message'>" +
         "<img src='./images/loading.gif' height='60' width='60'>" +
-        "<p> <strong>Non affidarsi completamente alla risposte del modello. La fonte affidabile resta il docente. </strong> </p> </div>"
+        "<p> <strong>Non affidarsi completamente alle risposte del modello. La fonte affidabile resta il docente e, quindi, la visione della videolezione. </strong> </p> </div>"
     document.getElementById('chat').insertAdjacentHTML('beforeend', loadingImg);
 
     inputBox.value = "";

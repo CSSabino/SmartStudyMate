@@ -32,6 +32,8 @@ public class LoginServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
+        session.removeAttribute("matching");
+
         String address;
 
         if(docenteDAO.isPrimoAccesso(email)){
@@ -40,8 +42,6 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("email", email);
             address = "/WEB-INF/jsp/password.jsp";
         } else {
-
-            //dovremmo recuperare i video di un docente ma adesso ci concentriamo sul login
 
             Docente docente = new Docente();
             docente.setEmail(email);
@@ -63,36 +63,7 @@ public class LoginServlet extends HttpServlet {
                         if(i == videolezioni.size() - 1)
                             lastUrl = "si";
 
-                        try {
-                            URL url = new URL("http://localhost:5002/initialize_list_urls");
-                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                            conn.setRequestMethod("POST");
-                            conn.setDoOutput(true);
-
-                            String messaggio = "lesson=" + urlVideolezione + "&last=" + lastUrl;
-                            byte[] postData = messaggio.getBytes(StandardCharsets.UTF_8);
-                            int postDataLength = postData.length;
-                            conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
-
-                            try (OutputStream os = conn.getOutputStream()) {
-                                os.write(postData);
-                            }
-
-                            System.out.println("Messaggio inviato al server Python!");
-                            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                            String line;
-                            StringBuilder resp = new StringBuilder();
-
-                            while ((line = reader.readLine()) != null) {
-                                resp.append(line);
-                            }
-                            reader.close();
-
-                            System.out.println("Risposta dal server Python: " + resp.toString());
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        inizializzazioneDatabase(urlVideolezione, lastUrl);
                     }
                 }
 
@@ -125,6 +96,16 @@ public class LoginServlet extends HttpServlet {
         if(videolezioni != null && !(videolezioni.isEmpty())){
             session.setAttribute("videolezioni", videolezioni);
             session.setAttribute("success-access", "ok");
+
+            String lastUrl = "no";
+            for(int i=0; i< videolezioni.size(); i++){
+                String urlVideolezione = videolezioni.get(i).getUrlVideo();
+                if(i == videolezioni.size() - 1)
+                    lastUrl = "si";
+
+                inizializzazioneDatabase(urlVideolezione, lastUrl);
+            }
+
             address = "router-servlet?filejsp=home.jsp";
         } else {
             session.removeAttribute("success-login");
@@ -137,5 +118,40 @@ public class LoginServlet extends HttpServlet {
 
         dispatcher.forward(request, response);
     }
+
+    public void inizializzazioneDatabase(String urlVideolezione, String lastUrl){
+        try {
+            URL url = new URL("http://localhost:5002/initialize_list_urls");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+
+            String messaggio = "lesson=" + urlVideolezione + "&last=" + lastUrl;
+            byte[] postData = messaggio.getBytes(StandardCharsets.UTF_8);
+            int postDataLength = postData.length;
+            conn.setRequestProperty("Content-Length", Integer.toString(postDataLength));
+
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(postData);
+            }
+
+            System.out.println("Messaggio inviato al server Python!");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line;
+            StringBuilder resp = new StringBuilder();
+
+            while ((line = reader.readLine()) != null) {
+                resp.append(line);
+            }
+            reader.close();
+
+            System.out.println("Risposta dal server Python: " + resp.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
 
