@@ -106,7 +106,7 @@ Seleziona il file con estensione war del progetto:
 
 ### Conferma le selezioni
 
-Clicca su "Ok" e poi "Apply" per confermare le scelte di configurazione:
+Clicca su "Apply" e poi "Ok" per confermare le scelte di configurazione:
 
 ![SSM](img_installazione/Ok%20-%20apply.jpg)
 
