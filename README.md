@@ -106,7 +106,7 @@ import sys
 print("Da copiare -->\t\t", sys.executable)
 ```
 
-4. Esegui il nuovo file creato facendo click col tato destro sul nuovo file creato:
+4. Esegui il nuovo file creato facendo click col il tasto destro sul nuovo file creato:
 
 ![SSM](img_installazione/run%20file.jpg)
 5. Copia il testo avuto come risultato dall'esecuzione del file:
