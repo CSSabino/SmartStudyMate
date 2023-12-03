@@ -54,17 +54,71 @@ Scegli un nome per il tuo progetto e clicca su "Create":
 
 ![SSM](img_installazione/create%20project.jpg)
 
-## Caricamento file sul progetto creato su PyCharm
+## Caricamento file nel progetto creato su PyCharm
 
 Seleziona i file presenti nella cartella "langchain_ssm" e copiali all'interno del nuovo progetto creato:
 
 ![SSM](img_installazione/move%20file.jpg)
 
+## Installazione package
+
+Prima di poter eseguire i due file c'è bisogno di effettuare l'installazione dei package necessari. Tale operazione può essere effettuata in due modi: installazione automatica prevista dall'IDE e l'installazione attraverso terminale.
+
+L'installazione attraverso terminale potrebbe non risolvere gli errori relativi all'assenza dei package necessari: bisogna dunque procedere in un modo alternativo.
+
+Tutte le modalità vengono definite di seguito.
+
+### Installazione automatica
+
 Clicca su "install requirements" per installare i package necessari per l'esecuzione delle due applicazioni:
 
 ![SSM](img_installazione/install%20package.jpg)
 
-Attendi che i package vengo correttamente installati. Successivamente, passa su IntelliJ.
+Attendi che i package vengano correttamente installati. Successivamente, passa su IntelliJ.
+
+### Installazione attraverso terminale
+
+**Primo modo**
+
+Apri il terminale sul progetto creato in PyCharm ed esegui la seguente istruzione:
+
+```bash
+pip install -r requirements.txt
+```
+
+Attendi che i package vengano correttamente installati. Successivamente, passa su IntelliJ.
+
+**Secondo modo**
+
+Se il primo modo non risolve gli errori relativi all'assenza dei package, svolgere le seguenti operazioni:
+
+1. Crea un nuovo file Python facendo click con il tasto destro sul nome del progetto creato su PyCharm:
+
+![SSM](img_installazione/new%20py%20file.jpg)
+2. Scegli un nome per il tuo file Python:
+
+![SSM](img_installazione/new%20name%20file.jpg)
+
+3. Copia il seguente codice sul nuovo file creato:
+
+```python
+import sys
+print("Da copiare -->\t\t", sys.executable)
+```
+
+4. Esegui il nuovo file creato facendo click col tato destro sul nuovo file creato:
+
+![SSM](img_installazione/run%20file.jpg)
+5. Copia il testo avuto come risultato dall'esecuzione del file:
+
+![SSM](img_installazione/copy.jpg)
+6. Apri il terminale sul progetto creato in PyCharm ed esegui la seguente istruzione:
+
+```bash
+[testo copiato] -m pip install -r requirements.txt
+```
+
+Attendi che i package vengano correttamente installati. Successivamente, passa su IntelliJ.
 
 ## Build del progetto
 
