@@ -96,7 +96,6 @@ Se il primo modo non risolve gli errori relativi all'assenza dei package, svolge
 
 ![SSM](img_installazione/new%20py%20file.jpg)
 
-
 2. Scegli un nome per il tuo file Python:
 
 ![SSM](img_installazione/new%20name%20file.jpg)
@@ -111,9 +110,11 @@ print("Da copiare -->\t\t", sys.executable)
 4. Esegui il nuovo file creato facendo click col il tasto destro sul nuovo file creato:
 
 ![SSM](img_installazione/run%20file.jpg)
+
 5. Copia il testo avuto come risultato dall'esecuzione del file:
 
 ![SSM](img_installazione/copy.jpg)
+
 6. Apri il terminale sul progetto creato in PyCharm ed esegui la seguente istruzione:
 
 ```bash
