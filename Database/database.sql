@@ -19,4 +19,8 @@ create table videolezione(
     proprietario varchar(80) references docente(email)
 );
 
+
+-- Credenziali per l'accesso come insegnante a SmartStudyMate (al primo accesso bisogna cambiare la password)
 insert into docente values (true, "prova@gmail.com", "Prova", "Prova", "cambiami");
+insert into docente values (true, "prova1@gmail.com", "Prova1", "Prova1", "cambiami");
+insert into docente values (true, "prova2@gmail.com", "Prova2", "Prova2", "cambiami");

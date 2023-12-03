@@ -39,7 +39,7 @@
         <button type="submit">Entra</button>
     </form>
 
-    <p><strong>Se sei un docente, accedi con le tue credenziali.</strong></p>
+    <p><strong>Se sei un insegnate, accedi con le tue credenziali.</strong></p>
     <form action="login" method="post">
         <label class="label-form" for="email">Email:</label>
         <input class="input-form" type="text" id="email" name="email" placeholder="Inserisci il tuo indirizzo mail" required>

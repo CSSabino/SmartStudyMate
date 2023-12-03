@@ -160,6 +160,26 @@ Esegui il web server Tomcat da IntelliJ:
 
 ![SSM](img_installazione/Run%20Intellij.jpg)
 
+# Accesso tramite credenziali a SmartStudyMate
+
+Nel file "database.sql" vengono create tre tuple relative ai docenti. Accedi a SmartStudyMate come insegnante utilizzando uno dei tre gruppi di credenziali:
+
+1. PRIMO GRUPPO
+    - Username: prova@gmail.com
+    - Password: cambiami
+   
+
+2. SECONDO GRUPPO
+    - Username: prova1@gmail.com
+    - Password: cambiami
+
+
+3. TERZO GRUPPO
+    - Username: prova2@gmail.com
+    - Password: cambiami
+
+Al primo accesso si richiede obbligatoriamente la scelta di una nuova password.
+
 
 
 
