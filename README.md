@@ -95,6 +95,8 @@ Se il primo modo non risolve gli errori relativi all'assenza dei package, svolge
 1. Crea un nuovo file Python facendo click con il tasto destro sul nome del progetto creato su PyCharm:
 
 ![SSM](img_installazione/new%20py%20file.jpg)
+
+
 2. Scegli un nome per il tuo file Python:
 
 ![SSM](img_installazione/new%20name%20file.jpg)
