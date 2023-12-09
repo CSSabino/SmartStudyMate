@@ -69,9 +69,9 @@ def create_dbs_from_youtube_video_url():
         list_dbs.append(db)
         i += 1
         # Ci fermiamo alla creazione di soli due db per questioni legate all'utilizzo delle API di OpenAI e alla
-        # quantità di richieste effettuabili con in piano gratuito
-        # if i > len(list_url)-1:
-        if i > 2:
+        # quantità di richieste effettuabili con il piano gratuito
+        # if i > len(list_url)-1: # Utilizzare questa condizione se si vuole togliere la limitazione
+        if i > 1:
             app.config['dbs'] = list_dbs
             break
 

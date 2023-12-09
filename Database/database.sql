@@ -24,3 +24,7 @@ create table videolezione(
 insert into docente values (true, "prova@gmail.com", "Prova", "Prova", "cambiami");
 insert into docente values (true, "prova1@gmail.com", "Prova1", "Prova1", "cambiami");
 insert into docente values (true, "prova2@gmail.com", "Prova2", "Prova2", "cambiami");
+
+select * from videolezione;
+
+delete from videolezione where url = "https://www.youtube.com/watch?v=AYNuOO8TFiY";
